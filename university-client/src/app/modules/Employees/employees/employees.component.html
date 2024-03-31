@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 style="font-family: 'Arial', sans-serif;">רשימת העובדים</h2>
+      <table class="table table-striped" style="font-family: 'Arial', sans-serif;">
+        <thead>
+          <tr>
+            <th scope="col">שם פרטי</th>
+            <th scope="col">שם משפחה</th>
+            <th scope="col">תעודת זהות</th>
+            <th scope="col">פעולות</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let worker of workers">
+            <td>{{worker.f_name}}</td>
+            <td>{{worker.l_name}}</td>
+            <td>{{worker.tz}}</td>
+            <td>
+              <button class="btn btn-primary mr-2" (click)="editWorker(worker)">
+                <i class="fas fa-edit"></i> עריכה
+              </button>
+              <button class="btn btn-danger" (click)="deleteWorker(worker)">
+                <i class="fas fa-trash-alt"></i> מחיקה
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success" (click)="addWorker()">
+        <i class="fas fa-plus"></i> הוספת עובד חדש
+      </button>
+    </div>
+  </div>
+</div>

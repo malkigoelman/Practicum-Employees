@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Workers.Core.Models;
 
 namespace Workers
 {
@@ -14,6 +16,9 @@ namespace Workers
        // public DateOnly BirthDay { get; set; }
         public bool Gender { get; set; }
         public bool Active { get; set; }
+
+        //[InverseProperty("Worker")]
+        public List<Role> Roles { get; set; } // רשימת התפקידים של העובד
     }
 
 }

@@ -49,5 +49,14 @@ namespace Workers.Data
                 _dataContext.SaveChanges();
             }
         }
+        public IEnumerable<Role> GetWorkerRoles(int id)
+        {
+            var worker = GetWorkerById(id);
+            if (worker != null)
+            {
+                return worker.Roles;
+            }
+            return null;
+        }
     }
 }
