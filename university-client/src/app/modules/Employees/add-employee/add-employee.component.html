@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label for="birtheDay"><i class="fas fa-calendar-alt"></i> תאריך לידה:</label>
-            <input type="date" class="form-control" id="birtheDay" [(ngModel)]="newWorker.birtheDay" name="birtheDay" required>
+            <input type="date" class="form-control" id="birtheDay" [(ngModel)]="newWorker.birthDay" name="birtheDay" required>
         </div>
         <div class="form-group">
             <label for="gender"><i class="fas fa-venus-mars"></i> מגדר:</label>
@@ -24,6 +24,21 @@
                 <option value="female">נקבה</option>
             </select>
         </div>
+        <div *ngFor="let role of newWorker.roles; let i = index">
+            <div class="form-group">
+                <label for="roleName">שם התפקיד:</label>
+                <input type="text" class="form-control" id="roleName" [(ngModel)]="role.name" name="roleName" required>
+            </div>
+            <div class="form-group">
+                <label for="isAdmin">האם מנהל:</label><br>
+                <input type="radio" id="isAdminYes" name="isAdmin" [(ngModel)]="role.isAdmin" value="true">
+                <label for="isAdminYes">כן</label><br>
+                <input type="radio" id="isAdminNo" name="isAdmin" [(ngModel)]="role.isAdmin" value="false">
+                <label for="isAdminNo">לא</label><br>
+            </div>
+            <button type="button" class="btn btn-danger" (click)="removeRole(i)">ביטול תפקיד</button>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="addRole()">הוסף תפקיד </button>
         <button type="submit" class="btn btn-primary rounded-button"><i class="fas fa-save"></i> שמור</button>
     </form>
 </div>

@@ -13,16 +13,26 @@ export class AddEmployeeComponent {
 
   constructor(private employeesService: EmployeesService) { }
 
+  isActive: boolean = true;
+  saveEmployee(): void {
+      this.newWorker.active = this.isActive;
+      this.newWorker.birthDay=new Date();
+  }
+  addRole(): void {
+    this.newWorker.roles.push({ name: '', isAdmin: false, startDate: null });
+  }
+
+  removeRole(index: number): void {
+    this.newWorker.roles.splice(index, 1);
+  }
   onSubmit(): void {
     this.employeesService.addWorker(this.newWorker)
       .subscribe(
         (response) => {
           console.log('Worker added successfully:', response);
-          // כאן תוסיף פעולות נוספות לאחר הוספת העובד
         },
         (error) => {
           console.error('Failed to add worker:', error);
-          // טיפול בשגיאה במידה וההוספה נכשלה
         }
       );
   }

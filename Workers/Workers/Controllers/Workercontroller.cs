@@ -91,10 +91,6 @@ namespace Workers.Controllers
 
             return NoContent();
         }
-
-       
-
-       
         [HttpGet]
         public ActionResult Get()
         {
