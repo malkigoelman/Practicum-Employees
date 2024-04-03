@@ -15,11 +15,22 @@ export class EmployeesComponent implements OnInit {
 
   constructor(private employeesService: EmployeesService,private router: Router) { }
   ngOnInit(): void {
-    this.getAllWorkers();
+    this.getWorkers();
   }
-
-  getAllWorkers(): void {
-    this.employeesService.getAllWorkers()
+  deactivateWorker(id: Number): void {
+    this.employeesService.deactivateWorker(id)
+      .subscribe(
+        (updatedWorker) => {
+          console.log('Worker deactivated successfully:', updatedWorker);
+          this.workers = this.workers.filter(w => w !== updatedWorker);
+        },
+        (error) => {
+          console.error('Failed to deactivate worker:', error);
+        }
+      );
+  }
+  getWorkers(): void {
+    this.employeesService.getWorkers()
       .subscribe(
         (data) => {
           this.workers = data;
@@ -32,11 +43,7 @@ export class EmployeesComponent implements OnInit {
   editWorker(worker: Employee): void {
     console.log('Editing worker:', worker);
   }
-
   deleteWorker(worker: Employee): void {
     console.log('Deleting worker:', worker);
-  }
-  addWorker(): void {
-    this.router.navigate(['/add-worker']); // מעבר לראוט של הוספת עובד
   }
 }

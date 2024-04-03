@@ -3,6 +3,7 @@ export class Employee{
     public l_name:string;
     public tz:number;
     public birthDay:Date;
+    public startDate:Date;
     public gender:boolean;
     public active:boolean;
     public roles: Role[]; // מערך של תפקידים

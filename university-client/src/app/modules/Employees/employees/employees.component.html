@@ -1,39 +1,42 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"> -->
 
-<div class="container">
+<div class="container mt-5">
   <div class="row">
     <div class="col">
-      <h2 style="font-family: 'Arial', sans-serif;">רשימת העובדים</h2>
-      <table class="table table-striped" style="font-family: 'Arial', sans-serif;">
-        <thead>
-          <tr>
-            <th scope="col"><i class="fas fa-user"></i> שם פרטי</th>
-            <th scope="col"><i class="fas fa-user"></i> שם משפחה</th>
-            <th scope="col"><i class="fas fa-id-card"></i> תעודת זהות</th>
-            <th scope="col"><i class="fas fa-cogs"></i> פעולות</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let worker of workers">
-            <td>{{worker.f_name}}</td>
-            <td>{{worker.l_name}}</td>
-            <td>{{worker.tz}}</td>
-            <td>
-              <button class="btn btn-primary mr-2" (click)="editWorker(worker)">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button class="btn btn-danger" (click)="deleteWorker(worker)">
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="btn btn-success" (click)="addWorker()">
-        <i class="fas fa-plus"></i> הוספת עובד חדש
-      </button>
+      <div class="card rounded p-3" style="background-color: #cfe8d7;">
+        <h2 style="font-family: 'Arial', sans-serif;">רשימת העובדים</h2>
+        <table class="table table-striped" style="font-family: 'Arial', sans-serif;">
+          <thead>
+            <tr>
+              <th scope="col"><i class="fas fa-user"></i> שם פרטי</th>
+              <th scope="col"><i class="fas fa-user"></i> שם משפחה</th>
+              <th scope="col"><i class="fas fa-id-card"></i> תעודת זהות</th>
+              <th scope="col"><i class="fas fa-save"></i> תאריך תחילת העבודה </th>
+              <th scope="col"><i class="fas fa-cogs"></i> פעולות</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let worker of workers">
+              <td>{{worker.f_name}}</td>
+              <td>{{worker.l_name}}</td>
+              <td>{{worker.tz}}</td>
+              <td>{{worker.startDate}}</td>
+              <td>
+                <button class="btn btn-primary mr-2" (click)="editWorker(worker)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-danger" (click)="deactivateWorker(worker.tz)">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

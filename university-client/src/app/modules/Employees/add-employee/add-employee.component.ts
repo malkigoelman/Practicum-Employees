@@ -26,6 +26,7 @@ export class AddEmployeeComponent {
     this.newWorker.roles.splice(index, 1);
   }
   onSubmit(): void {
+    console.log(this.newWorker);
     this.employeesService.addWorker(this.newWorker)
       .subscribe(
         (response) => {
