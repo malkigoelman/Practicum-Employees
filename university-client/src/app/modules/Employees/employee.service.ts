@@ -16,14 +16,18 @@ export class EmployeesService {
        return this._http.get<Employee[]>(this._baseUrl); // שליפת  העובדים מהשרת
     }
     getAllWorkers(): Observable<Employee[]> {
-      const url = `${this._baseUrl}/all`;
-      return this._http.get<Employee[]>(url); // שליפת כל העובדים מהשרת
+      return this._http.get<Employee[]>(`${this._baseUrl}/all`); // שליפת כל העובדים מהשרת
    }
     addWorker(worker: Employee): Observable<Employee> {
       return this._http.post<Employee>(this._baseUrl, worker); // הוספת עובד לשרת
     }
-    deactivateWorker(id: Number): Observable<Employee> {
+    removeWorker(id: Number): Observable<Employee> {
       const url = `${this._baseUrl}/${id}`;
       return this._http.put<Employee>(url, null);
+    }
+    editWorker(employee:Employee):Observable<Employee>{
+      const url=`${this._baseUrl}/${employee.tz}`;
+      return this._http.put<Employee>(url,employee);  
+      // return this._http.put<Employee>(`https://localhost:7027/api/Workers/${employee.id}`,employee);  
     }
 }

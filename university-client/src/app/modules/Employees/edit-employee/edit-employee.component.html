@@ -1,49 +1,44 @@
-<!-- <p>edit-employee works!</p>
-<div class="container">
-    <h2>הוספת עובד חדש</h2>
-    <form (submit)="onSubmit()" class="rounded-form">
-        <div class="form-group">
-            <label for="f_name"><i class="fas fa-user"></i> שם פרטי:</label>
-            <input type="text" class="form-control" id="f_name" [(ngModel)]="newWorker.f_name" name="f_name" required>
-        </div>
-        <div class="form-group">
-            <label for="l_name"><i class="fas fa-user"></i> שם משפחה:</label>
-            <input type="text" class="form-control" id="l_name" [(ngModel)]="newWorker.l_name" name="l_name" required>
-        </div>
-        <div class="form-group">
-            <label for="tz"><i class="fas fa-id-card"></i> תעודת זהות:</label>
-            <input type="number" class="form-control" id="tz" [(ngModel)]="newWorker.tz" name="tz" required>
-        </div>
-        <div class="form-group">
-            <label for="birtheDay"><i class="fas fa-calendar-alt"></i> תאריך לידה:</label>
-            <input type="date" class="form-control" id="birtheDay" [(ngModel)]="newWorker.birthDay" name="birtheDay" required>
-        </div>
-        <div class="form-group">
-            <label for="startDate"><i class="fas fa-calendar-alt"></i> תאריך התחלה:</label>
-            <input type="date" class="form-control" id="startDate" [(ngModel)]="newWorker.startDate" name="startDate" required>
-        </div>
-        <div class="form-group">
-            <label for="gender"><i class="fas fa-venus-mars"></i> מגדר:</label>
-            <select class="form-control" id="gender" [(ngModel)]="newWorker.gender" name="gender" required>
-                <option value="male">זכר</option>
-                <option value="female">נקבה</option>
-            </select>
-        </div>
-        <div *ngFor="let role of newWorker.roles; let i = index">
-            <div class="form-group">
-                <label for="roleName">שם התפקיד:</label>
-                <input type="text" class="form-control" id="roleName" [(ngModel)]="role.name" name="roleName" required>
-            </div>
-            <div class="form-group">
-                <label for="isAdmin">האם מנהל:</label><br>
-                <input type="radio" id="isAdminYes" name="isAdmin" [(ngModel)]="role.isAdmin" value="true">
-                <label for="isAdminYes">כן</label><br>
-                <input type="radio" id="isAdminNo" name="isAdmin" [(ngModel)]="role.isAdmin" value="false">
-                <label for="isAdminNo">לא</label><br>
-            </div>
-            <button type="button" class="btn btn-danger" (click)="removeRole(i)">ביטול תפקיד</button>
-        </div>
-        <button type="button" class="btn btn-primary" (click)="addRole()">הוסף תפקיד </button>
-        <button type="submit" class="btn btn-primary rounded-button"><i class="fas fa-save"></i> שמור</button>
+<p>work?</p>
+<!-- <div class="container">
+    <h2>Edit Employee</h2>
+    <form (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label for="f_name">First Name:</label>
+        <input type="text" class="form-control" id="f_name" name="f_name" [(ngModel)]="newWorker.f_name">
+      </div>
+      <div class="form-group">
+        <label for="l_name">Last Name:</label>
+        <input type="text" class="form-control" id="l_name" name="l_name" [(ngModel)]="newWorker.l_name">
+      </div>
+      <div class="form-group">
+        <label for="tz">ID:</label>
+        <input type="number" class="form-control" id="tz" name="tz" [(ngModel)]="newWorker.tz">
+      </div>
+      <div class="form-group">
+        <label for="birthDay">Birth Date:</label>
+        <input type="date" class="form-control" id="birthDay" name="birthDay" [(ngModel)]="newWorker.birthDay">
+      </div>
+      <div class="form-group">
+        <label for="startDate">Start Date:</label>
+        <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="newWorker.startDate">
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select class="form-control" id="gender" name="gender" [(ngModel)]="newWorker.gender">
+          <option [ngValue]="true">Male</option>
+          <option [ngValue]="false">Female</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="active">Active:</label>
+        <input type="checkbox" class="form-control" id="active" name="active" [(ngModel)]="newWorker.active">
+      </div>
+      <div class="form-group">
+        <label for="roles">Roles:</label>
+        <select multiple class="form-control" id="roles" name="roles" [(ngModel)]="newWorker.roles">
+          <option *ngFor="let role of newWorker.roles" [ngValue]="role">{{ role.name }}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-</div> -->
+  </div> -->

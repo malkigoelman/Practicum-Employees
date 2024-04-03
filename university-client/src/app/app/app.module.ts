@@ -6,10 +6,12 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app.routes";
 import { EmployeesModule } from "../modules/Employees/employees.module";
 import { AddEmployeeComponent } from "../modules/Employees/add-employee/add-employee.component";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
     imports: [
         BrowserModule,
+        HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
         EmployeesModule, // מייבאים את EmployeesModule ולא את הקומפוננטה בודדת

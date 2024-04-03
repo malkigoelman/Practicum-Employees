@@ -16,7 +16,7 @@ export class AddEmployeeComponent {
   isActive: boolean = true;
   saveEmployee(): void {
       this.newWorker.active = this.isActive;
-      this.newWorker.birthDay=new Date();
+      // this.newWorker.birthDay=new Date();
   }
   addRole(): void {
     this.newWorker.roles.push({ name: '', isAdmin: false, startDate: null });
@@ -26,6 +26,7 @@ export class AddEmployeeComponent {
     this.newWorker.roles.splice(index, 1);
   }
   onSubmit(): void {
+    this.newWorker.active = this.isActive;
     console.log(this.newWorker);
     this.employeesService.addWorker(this.newWorker)
       .subscribe(

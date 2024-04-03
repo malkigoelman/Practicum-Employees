@@ -26,6 +26,7 @@ namespace Workers.Controllers
             return Ok(_workerRepository.GetAll());
         }
         [HttpGet("/all")]
+        [Produces("application/json")]
         public ActionResult GetAllEmployees()
         {
             return Ok(_workerRepository.GetAllEmployees());
@@ -46,11 +47,6 @@ namespace Workers.Controllers
         {
             _workerRepository.Add(worker);
 
-            //foreach (var role in worker.Roles)
-            //{
-            //    role.EmployeeId = worker.id;
-            //    _dataContext.Roles.Add(role);
-            //}
             _dataContext.SaveChanges();
 
             return CreatedAtAction(nameof(Get), new { id = worker.Tz }, worker);
@@ -60,16 +56,11 @@ namespace Workers.Controllers
         public ActionResult Put(int id, [FromBody] Worker worker)
         {
             _workerRepository.Update(id, worker);
-            var existingRoles = _dataContext.Roles.Where(r => r.EmployeeId == id).ToList();
+            var existingRoles = _dataContext.Roles.Where(r => r.Id == id).ToList();
             foreach (var role in existingRoles)
             {
                 _dataContext.Roles.Remove(role);
             }
-            //foreach (var role in worker.Roles)
-            //{
-            //    role.EmployeeId = id;
-            //    _dataContext.Roles.Add(role);
-            //}
             _dataContext.SaveChanges();
 
             return NoContent();

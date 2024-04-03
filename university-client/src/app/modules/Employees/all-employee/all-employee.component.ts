@@ -13,7 +13,7 @@ export class AllEmployeeComponent implements OnInit {
 
   constructor(private employeesService: EmployeesService) { }
 
-  workers:Employee[];
+  employees:Employee[];
 
   ngOnInit(): void {
     this.getAllWorkers();
@@ -22,12 +22,11 @@ export class AllEmployeeComponent implements OnInit {
     this.employeesService.getAllWorkers()
       .subscribe(
         (data) => {
-          this.workers = data;
+          this.employees = data;
+        },
+        (error) => {
+          console.log(error); // טיפול בשגיאות
         }
-        // ,
-        // (error) => {
-        //   console.log(error); // טיפול בשגיאות
-        // }
       );
   }
 }

@@ -13,14 +13,14 @@
             <label for="tz"><i class="fas fa-id-card"></i> תעודת זהות:</label>
             <input type="number" class="form-control" id="tz" [(ngModel)]="newWorker.tz" name="tz" required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="birtheDay"><i class="fas fa-calendar-alt"></i> תאריך לידה:</label>
             <input type="date" class="form-control" id="birtheDay" [(ngModel)]="newWorker.birthDay" name="birtheDay" required>
         </div>
         <div class="form-group">
             <label for="startDate"><i class="fas fa-calendar-alt"></i> תאריך התחלה:</label>
             <input type="date" class="form-control" id="startDate" [(ngModel)]="newWorker.startDate" name="startDate" required>
-        </div>
+        </div> -->
         <div class="form-group">
             <label for="gender"><i class="fas fa-venus-mars"></i> מגדר:</label>
             <select class="form-control" id="gender" [(ngModel)]="newWorker.gender" name="gender" required>
@@ -35,9 +35,9 @@
             </div>
             <div class="form-group">
                 <label for="isAdmin">האם מנהל:</label><br>
-                <input type="radio" id="isAdminYes" name="isAdmin" [(ngModel)]="role.isAdmin" value="true">
+                <input type="radio" id="isAdminYes" name="isAdmin{{i}}" [(ngModel)]="role.isAdmin" [value]="true">
                 <label for="isAdminYes">כן</label><br>
-                <input type="radio" id="isAdminNo" name="isAdmin" [(ngModel)]="role.isAdmin" value="false">
+                <input type="radio" id="isAdminNo" name="isAdmin{{i}}" [(ngModel)]="role.isAdmin" [value]="false">
                 <label for="isAdminNo">לא</label><br>
             </div>
             <button type="button" class="btn btn-danger" (click)="removeRole(i)">ביטול תפקיד</button>

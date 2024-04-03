@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeesService } from '../employee.service';
 import { Router } from '@angular/router';
-
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-employees',
@@ -13,12 +13,12 @@ export class EmployeesComponent implements OnInit {
 
   workers: Employee[]; // מערך לאחסון העובדים
 
-  constructor(private employeesService: EmployeesService,private router: Router) { }
+  constructor(private employeesService: EmployeesService, private router: Router) { }
   ngOnInit(): void {
     this.getWorkers();
   }
-  deactivateWorker(id: Number): void {
-    this.employeesService.deactivateWorker(id)
+  removeWorker(id: Number): void {
+    this.employeesService.removeWorker(id)
       .subscribe(
         (updatedWorker) => {
           console.log('Worker deactivated successfully:', updatedWorker);
@@ -40,10 +40,25 @@ export class EmployeesComponent implements OnInit {
         }
       );
   }
+  addWorker(): void {
+    console.log('add worker');
+    this.router.navigate(['/add']);
+  }
   editWorker(worker: Employee): void {
     console.log('Editing worker:', worker);
+    this.router.navigate(['/', worker.id]); // מנותב לדף העריכה ומעביר את מספר הזיהוי של העובד כפרמטר
   }
-  deleteWorker(worker: Employee): void {
-    console.log('Deleting worker:', worker);
+  deleteWorker(id: number): void {
+    console.log('Deleting worker:', id);
+  }
+
+  exportXSLX() {
+    var name = 'Employees.xlsx';
+    let element = document.getElementById('workers');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const wb:XLSX.WorkBook=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,ws,'גליון1');
+    XLSX.writeFile(wb,name);
+
   }
 }

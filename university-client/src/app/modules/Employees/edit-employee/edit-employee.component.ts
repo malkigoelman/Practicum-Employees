@@ -1,37 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeesService } from '../employee.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-employee',
-  standalone: true,
-  imports: [],
   templateUrl: './edit-employee.component.html',
-  styleUrl: './edit-employee.component.css'
+  styleUrls: ['./edit-employee.component.css']
 })
-export class EditEmployeeComponent {
+export class EditEmployeeComponent implements OnInit {
 
-  newWorker: Employee = new Employee(); // יצירת מופע חדש של עובד
+  newWorker: Employee = new Employee(); // Creating a new instance of Employee
 
-  constructor(private employeesService: EmployeesService) { }
+  constructor(
+    private employeesService: EmployeesService,
+    private route: ActivatedRoute
+  ) { }
 
-  addRole(): void {
-    this.newWorker.roles.push({ name: '', isAdmin: false, startDate: null });
+  ngOnInit(): void {
+    const employeeId = +this.route.snapshot.paramMap.get('id');
+    // this.employeesService.getEmployeeById(employeeId)
+    //   .subscribe((employee: Employee) => {
+    //     this.newWorker = employee;
+    //   });
   }
 
-  removeRole(index: number): void {
-    this.newWorker.roles.splice(index, 1);
+  submitForm(): void {
+    this.employeesService.editWorker(this.newWorker)
+      .subscribe((updatedEmployee: Employee) => {
+        console.log('Employee updated successfully:', updatedEmployee);
+      });
   }
-  onSubmit(): void {
-    console.log(this.newWorker);
-    this.employeesService.addWorker(this.newWorker)
-      .subscribe(
-        (response) => {
-          console.log('Worker added successfully:', response);
-        },
-        (error) => {
-          console.error('Failed to add worker:', error);
-        }
-      );
-  }
+
 }
