@@ -41,7 +41,6 @@ namespace Workers.Controllers
             }
             return Ok(worker);
         }
-
         [HttpPost]
         public ActionResult Post([FromBody] Worker worker)
         {
@@ -51,7 +50,6 @@ namespace Workers.Controllers
 
             return CreatedAtAction(nameof(Get), new { id = worker.Tz }, worker);
         }
-
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Worker worker)
         {
@@ -65,7 +63,6 @@ namespace Workers.Controllers
 
             return NoContent();
         }
-
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

@@ -34,10 +34,9 @@ namespace Workers.Data
         {
             return _dataContext.Workers.ToList();
         }
-
         public Worker GetWorkerById(int id)
         {
-            return _dataContext.Workers.FirstOrDefault(w => w.Tz== id);
+            return _dataContext.Workers.FirstOrDefault(w => w.id== id);
         }
 
         public void Update(int id, Worker worker)

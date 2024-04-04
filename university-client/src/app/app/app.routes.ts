@@ -9,7 +9,8 @@ const routes: Routes = [
     { path: 'employees', component: EmployeesComponent },
     { path: 'add', component: AddEmployeeComponent },
     { path: 'all', component: AllEmployeeComponent },
-    { path: 'edit/:id', component: EditEmployeeComponent }
+    { path: 'edit/:id', component: EditEmployeeComponent },
+    { path: 'id', component: EmployeesComponent }
     // ניתן להוסיף נתיבים נוספים כאן לדפים נוספים באפליקציה
   ];
 

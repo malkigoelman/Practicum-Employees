@@ -1,5 +1,5 @@
 export class Employee{
-    public id:number=0;
+    public id:number;
     public f_name:string;
     public l_name:string;
     public tz:number;
@@ -10,7 +10,6 @@ export class Employee{
     public roles: Role[]; // מערך של תפקידים
 
     constructor() {
-        this.id++;
         this.roles = []; // אתחול של המערך בבנאי
     }
 }

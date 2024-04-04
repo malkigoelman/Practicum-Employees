@@ -17,17 +17,13 @@ export class EmployeesComponent implements OnInit {
   ngOnInit(): void {
     this.getWorkers();
   }
-  removeWorker(id: Number): void {
+  removeWorker(worker: Employee): void {
+    const id = worker.id;
+    console.log(id);
     this.employeesService.removeWorker(id)
-      .subscribe(
-        (updatedWorker) => {
-          console.log('Worker deactivated successfully:', updatedWorker);
-          this.workers = this.workers.filter(w => w !== updatedWorker);
-        },
-        (error) => {
-          console.error('Failed to deactivate worker:', error);
-        }
-      );
+          // this.workers = this.workers.filter(w => w !== worker);
+      ;
+      console.log(worker.active);
   }
   getWorkers(): void {
     this.employeesService.getWorkers()
@@ -46,12 +42,8 @@ export class EmployeesComponent implements OnInit {
   }
   editWorker(worker: Employee): void {
     console.log('Editing worker:', worker);
-    this.router.navigate(['/', worker.id]); // מנותב לדף העריכה ומעביר את מספר הזיהוי של העובד כפרמטר
+    this.router.navigate(['/', worker.tz]); // מנותב לדף העריכה ומעביר את מספר הזיהוי של העובד כפרמטר
   }
-  deleteWorker(id: number): void {
-    console.log('Deleting worker:', id);
-  }
-
   exportXSLX() {
     var name = 'Employees.xlsx';
     let element = document.getElementById('workers');

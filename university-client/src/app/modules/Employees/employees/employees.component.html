@@ -1,6 +1,6 @@
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
-<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <button (click)="exportXSLX()">להורדת פרטי העובדים</button>
 <div class="container mt-25">
@@ -23,7 +23,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let worker of workers">
-                  <td>{{worker.id}}</td>
+                  <td></td>
                   <td>{{worker.f_name}}</td>
                   <td>{{worker.l_name}}</td>
                   <td>{{worker.tz}}</td>
@@ -32,7 +32,7 @@
                     <button class="btn btn-primary mr-2" (click)="editWorker(worker)">
                       <i class="fas fa-edit"></i>
                     </button>
-                    <button class="btn btn-danger" (click)="removeWorker(worker.tz)">
+                    <button class="btn btn-danger" (click)="removeWorker(worker)">
                       <i class="fas fa-trash-alt"></i>
                     </button>
                   </td>

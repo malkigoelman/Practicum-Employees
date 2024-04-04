@@ -1,8 +1,10 @@
-using System.Text.Json.Serialization;
 using Employee.Core.Repositories;
 using Employee.Core.Services;
 using Employee.Data;
 using Employee.Service;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json.Serialization;
 using Workers.Core.Repositories;
 using Workers.Data;
 using Workers.Service;
@@ -10,6 +12,11 @@ using Workers.Service;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:4200"));
+});
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -24,9 +31,9 @@ builder.Services.AddSwaggerGen();
 //כאן צריך להוסיף
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
-builder.Services.AddScoped<IWorkerService,WorkerService>();
-builder.Services.AddScoped<IRoleService,RoleService>();
-builder.Services.AddScoped<IRoleRepository,RoleRepository>();
+builder.Services.AddScoped<IWorkerService, WorkerService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,6 +44,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// הוסף את השירות של CORS לאחר חיבור HTTPS ולפני האימות והניווט
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthorization();
 
