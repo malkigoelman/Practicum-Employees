@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Employee.Data.Migrations
 {
-    public partial class Employees : Migration
+    public partial class MigrationName : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,9 +30,12 @@ namespace Employee.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     F_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     L_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tz = table.Column<int>(type: "int", nullable: false),
+                    Tz = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Gender = table.Column<bool>(type: "bit", nullable: false),
-                    Active = table.Column<bool>(type: "bit", nullable: false)
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,6 +51,7 @@ namespace Employee.Data.Migrations
                     EmployeeId = table.Column<int>(type: "int", nullable: false),
                     NameId = table.Column<int>(type: "int", nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Workerid = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

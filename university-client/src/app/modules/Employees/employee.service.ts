@@ -29,4 +29,8 @@ export class EmployeesService {
       return this._http.put<Employee>(url,employee);  
       // return this._http.put<Employee>(`https://localhost:7027/api/Workers/${employee.id}`,employee);  
     }
+    getWorkerById(id: number): Observable<Employee> {
+      const url = `${this._baseUrl}/${id}`;
+      return this._http.get<Employee>(url);
+    }
 }

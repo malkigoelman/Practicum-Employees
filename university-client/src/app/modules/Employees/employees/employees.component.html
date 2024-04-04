@@ -3,14 +3,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <button (click)="exportXSLX()">להורדת פרטי העובדים</button>
+<button (click)="exportXSLXToMail()">לשליחת פרטי העובדים</button>
 <div class="container mt-25">
   <div class="row justify-content-center">
     <div class="col-md-25">
       <div class="card">
         <div class="card-body">
-          <!-- <div class="card rounded p-3" style="background-color: #cfe8d7;"> -->
-            <h2 class="card-title text-center turquoise">רשימת העובדים</h2>
-            <table class="table table-striped" style="font-family: 'Arial', sans-serif;">
+          <h2 class="card-title text-center turquoise">רשימת העובדים</h2>
+          <table #table class="table table-striped" style="font-family:'Arial', sans-serif;">
               <thead>
                 <tr>
                   <th scope="col"></th>
@@ -27,12 +27,12 @@
                   <td>{{worker.f_name}}</td>
                   <td>{{worker.l_name}}</td>
                   <td>{{worker.tz}}</td>
-                  <td>{{worker.active}}</td><!--כאן צריך להיות תאריך-->
+                  <td>{{worker.startDate}}</td><!--כאן צריך להיות תאריך-->
                   <td>
                     <button class="btn btn-primary mr-2" (click)="editWorker(worker)">
                       <i class="fas fa-edit"></i>
                     </button>
-                    <button class="btn btn-danger" (click)="removeWorker(worker)">
+                    <button class="btn btn-danger " (click)="removeWorker(worker)">
                       <i class="fas fa-trash-alt"></i>
                     </button>
                   </td>
@@ -46,5 +46,4 @@
         </div>
       </div>
     </div>
-    </div>
-    
+  </div>

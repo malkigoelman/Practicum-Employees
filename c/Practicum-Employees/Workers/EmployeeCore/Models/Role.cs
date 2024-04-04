@@ -15,7 +15,7 @@ using System;
             public int EmployeeId { get; set; }
             public RoleName Name { get; set; }
             public bool IsAdmin { get; set; }
-            //public DateOnly StartDate { get; set; } //בדיקה שזה אחרי התאריך היום
+            public DateTime StartDate { get; set; } //בדיקה שזה אחרי התאריך היום
             //לא ניתן לבחור תפקיד פעמיים לאותו עובד
 
         }

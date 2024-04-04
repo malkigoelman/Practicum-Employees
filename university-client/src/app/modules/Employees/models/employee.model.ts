@@ -2,11 +2,12 @@ export class Employee{
     public id:number;
     public f_name:string;
     public l_name:string;
-    public tz:number;
-    // public birthDay:Date;
-    // public startDate:Date;
+    public tz:string;
+    public birthDay:Date;
+    public startDate:Date;
     public gender:boolean;
     public active:boolean;
+    public email:string;
     public roles: Role[]; // מערך של תפקידים
 
     constructor() {

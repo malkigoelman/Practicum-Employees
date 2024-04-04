@@ -12,8 +12,8 @@ using Workers.Data;
 namespace Employee.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240403162107_Employees")]
-    partial class Employees
+    [Migration("20240404164145_MigrationName")]
+    partial class MigrationName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,9 @@ namespace Employee.Data.Migrations
                     b.Property<int>("NameId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("Workerid")
                         .HasColumnType("int");
 
@@ -81,6 +84,14 @@ namespace Employee.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("BirthDay")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("BirthDay");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("F_name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -92,8 +103,12 @@ namespace Employee.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Tz")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Tz")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 

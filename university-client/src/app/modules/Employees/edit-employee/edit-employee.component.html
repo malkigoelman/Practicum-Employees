@@ -1,44 +1,44 @@
-<p>work?</p>
-<!-- <div class="container">
-    <h2>Edit Employee</h2>
-    <form (ngSubmit)="submitForm()">
+<div>
+  <h2>Edit Employee</h2>
+  <form (ngSubmit)="saveChanges()">
+    <div class="form-group">
+      <label for="f_name"><i class="fas fa-user"></i> First Name:</label>
+      <input type="text" class="form-control" id="f_name" [(ngModel)]="employee.f_name" name="f_name" required>
+    </div>
+    <div class="form-group">
+      <label for="l_name"><i class="fas fa-user"></i> Last Name:</label>
+      <input type="text" class="form-control" id="l_name" [(ngModel)]="employee.l_name" name="l_name" required>
+    </div>
+    <div class="form-group">
+      <label for="tz"><i class="fas fa-id-card"></i> ID:</label>
+      <input type="text" class="form-control" id="tz" [(ngModel)]="employee.tz" name="tz" required>
+    </div>
+    <div class="form-group">
+      <label for="gender"><i class="fas fa-venus-mars"></i> Gender:</label>
+      <select class="form-control" id="gender" [(ngModel)]="employee.gender" name="gender" required>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+    <!-- <div class="form-group">
+      <label for="active"><i class="fas fa-check-circle"></i> Active:</label>
+      <input type="checkbox" class="form-control" id="active" [(ngModel)]="employee.active" name="active">
+    </div> -->
+    <!-- Add fields for roles -->
+    <div *ngFor="let role of employee.roles; let i = index">
       <div class="form-group">
-        <label for="f_name">First Name:</label>
-        <input type="text" class="form-control" id="f_name" name="f_name" [(ngModel)]="newWorker.f_name">
+        <label for="roleName">Role Name:</label>
+        <input type="text" class="form-control" id="roleName{{i}}" [(ngModel)]="role.name" name="roleName{{i}}" required>
       </div>
       <div class="form-group">
-        <label for="l_name">Last Name:</label>
-        <input type="text" class="form-control" id="l_name" name="l_name" [(ngModel)]="newWorker.l_name">
+        <label for="isAdmin">Is Admin:</label><br>
+        <input type="radio" id="isAdminYes{{i}}" name="isAdmin{{i}}" [(ngModel)]="role.isAdmin" [value]="true">
+        <label for="isAdminYes{{i}}">Yes</label><br>
+        <input type="radio" id="isAdminNo{{i}}" name="isAdmin{{i}}" [(ngModel)]="role.isAdmin" [value]="false">
+        <label for="isAdminNo{{i}}">No</label><br>
       </div>
-      <div class="form-group">
-        <label for="tz">ID:</label>
-        <input type="number" class="form-control" id="tz" name="tz" [(ngModel)]="newWorker.tz">
-      </div>
-      <div class="form-group">
-        <label for="birthDay">Birth Date:</label>
-        <input type="date" class="form-control" id="birthDay" name="birthDay" [(ngModel)]="newWorker.birthDay">
-      </div>
-      <div class="form-group">
-        <label for="startDate">Start Date:</label>
-        <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="newWorker.startDate">
-      </div>
-      <div class="form-group">
-        <label for="gender">Gender:</label>
-        <select class="form-control" id="gender" name="gender" [(ngModel)]="newWorker.gender">
-          <option [ngValue]="true">Male</option>
-          <option [ngValue]="false">Female</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="active">Active:</label>
-        <input type="checkbox" class="form-control" id="active" name="active" [(ngModel)]="newWorker.active">
-      </div>
-      <div class="form-group">
-        <label for="roles">Roles:</label>
-        <select multiple class="form-control" id="roles" name="roles" [(ngModel)]="newWorker.roles">
-          <option *ngFor="let role of newWorker.roles" [ngValue]="role">{{ role.name }}</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div> -->
+    </div>
+    <button type="button" class="btn btn-primary" (click)="addRole()">Add Role</button>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+  </form>
+</div>
