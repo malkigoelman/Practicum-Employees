@@ -1,8 +1,10 @@
-﻿using Employee.Core.Models;
+﻿using AutoMapper;
+using Employee.Core.Models;
 using Employee.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Workers.Core.Models;
 
 namespace Employee.Api.Controllers
@@ -12,69 +14,74 @@ namespace Employee.Api.Controllers
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _roleService;
+        private readonly IMapper _mapper;
 
-        public RoleController(IRoleService roleService)
+
+        public RoleController(IRoleService roleService,IMapper mapper)
         {
             _roleService = roleService;
+            _mapper = mapper;   
         }
 
         [HttpGet]
-        public IEnumerable<Role> Get()
+        public async Task<IEnumerable<Role>> Get()
         {
-            return _roleService.Get();
+            return await _roleService.GetAsync();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Role> Get(int id)
+        public async Task<ActionResult<Role>> Get(int id)
         {
-            var role = _roleService.Get().FirstOrDefault(r => r.Id == id);
-            if (role == null)
+            var role = await _roleService.GetAsync();
+            var foundRole = role.FirstOrDefault(r => r.EmployeeId == id);
+            if (foundRole == null)
             {
                 return NotFound();
             }
-            return role;
+            return foundRole;
         }
 
         [HttpPost("AddRole")]
-        public IActionResult AddRole([FromBody] Role role)
+        public async Task<IActionResult> AddRole([FromBody] Role role)
         {
-            _roleService.Add(role);
-            return CreatedAtAction(nameof(Get), new { id = role.Id }, role);
+            await _roleService.AddAsync(role);
+            return CreatedAtAction(nameof(Get), new { id = role.EmployeeId }, role);
         }
 
         [HttpPost("AddRoleName")]
-        public IActionResult AddRoleName([FromBody] RoleName name)
+        public async Task<IActionResult> AddRoleName([FromBody] RoleName name)
         {
-            _roleService.Add(name);
+            await _roleService.AddAsync(name);
             return CreatedAtAction(nameof(GetRoleNames), new { id = name.Id }, name);
         }
 
         [HttpGet("GetRoleNames")]
-        public IEnumerable<RoleName> GetRoleNames()
+        public async Task<IEnumerable<RoleName>> GetRoleNames()
         {
-            return _roleService.GetRoleNames();
+            return await _roleService.GetRoleNamesAsync();
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Role role)
+        public async Task<IActionResult> Put(int id, [FromBody] Role role)
         {
-            if (id != role.Id)
+            if (id != role.EmployeeId)
             {
                 return BadRequest();
             }
-            _roleService.Update(role);
+            await _roleService.UpdateAsync(role);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var existingRole = _roleService.Get().FirstOrDefault(r => r.Id == id);
-            if (existingRole == null)
+            var existingRole = await _roleService.GetAsync();
+            var foundRole = existingRole.FirstOrDefault(r => r.EmployeeId == id);
+            if (foundRole == null)
             {
                 return NotFound();
             }
-            _roleService.Delete(id);
+            await _roleService.DeleteAsync(id);
             return NoContent();
         }
     }

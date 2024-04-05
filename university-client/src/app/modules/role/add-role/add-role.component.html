@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Add New Role</h2>
+  <form [formGroup]="roleForm" (ngSubmit)="saveRole()">
+    <div class="form-group">
+      <label for="roleName">Role Name:</label>
+      <input type="text" formControlName="roleName" class="form-control" id="roleName">
+    </div>
+    <div class="form-group">
+      <label for="isAdmin">Is Admin:</label>
+      <input type="checkbox" formControlName="isAdmin" class="form-check-input" id="isAdmin">
+    </div>
+    <div class="form-group">
+      <label for="startDate">Start Date:</label>
+      <input type="date" formControlName="startDate" class="form-control" id="startDate">
+    </div>
+    <button type="button" class="btn btn-primary" (click)="saveRole()" [disabled]="!roleForm.valid || !isStartDateValid()">Save</button>
+  </form>
+</div>

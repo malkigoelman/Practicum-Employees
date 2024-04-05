@@ -1,0 +1,5 @@
+<div [style.background-color]="selectedColor">
+    <p>tools works!</p>
+    <label for="exampleColorInput" class="form-label">Color picker</label>
+    <input type="color" class="form-control form-control-color" id="exampleColorInput" [(ngModel)]="selectedColor" (input)="changeBackgroundColor()" title="Choose your color">
+</div>

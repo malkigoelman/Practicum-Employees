@@ -5,10 +5,11 @@
             <div class="" id="navbarNav">
                 <ul class="nav">
                     <li class="nav-item">
-                        <!-- <a class="nav-link" routerLink="/course/all">All Courses</a> -->
+                        <a class="nav-link" routerLink="/all">All Employee</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/all">All Employee</a>
+                        <a class="nav-link" routerLink="/tool" (mouseover)="showSettings()" (mouseleave)="hideSettings()">⚙</a>
+                        <span *ngIf="isHovering" class="tooltip">הגדרות</span>
                     </li>
                    
                 </ul>

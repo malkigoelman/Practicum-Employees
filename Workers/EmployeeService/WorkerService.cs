@@ -15,29 +15,31 @@ namespace Workers.Service
         {
             _workerRepository = workerRepository;
         }
-        public IEnumerable<Worker> GetAll()
+        public async Task<IEnumerable<Worker>> GetAllAsync()
         {
-            return _workerRepository.GetAll();
+            return await _workerRepository.GetAllAsync();
         }
-        public IEnumerable<Worker> GetAllEmployees()
+        public async Task<IEnumerable<Worker>> GetAllEmployeesAsync()
         {
-            return _workerRepository.GetAllEmployees();
+            return await _workerRepository.GetAllEmployeesAsync();
         }
-        public Worker GetWorkerById(int id)
+        public async Task<Worker> GetWorkerByIdAsync(int id)
         {
-            return _workerRepository.GetWorkerById(id);
+            return await _workerRepository.GetWorkerByIdAsync(id);
         }
-        public void Add(Worker worker)
+
+        public async Task AddAsync(Worker worker)
         {
-            _workerRepository.Add(worker);
+            await _workerRepository.AddAsync(worker);
         }
-        public void Update(int id, Worker worker)
+        public async Task UpdateAsync(int id, Worker worker)
         {
-            _workerRepository.Update(id, worker);
+            await _workerRepository.UpdateAsync(id, worker);
         }
-        public void Delete(int id)
+
+        public async Task DeleteAsync(int id)
         {
-            _workerRepository.Delete(id);
+            await _workerRepository.DeleteAsync(id);
         }
     }
 }

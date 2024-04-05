@@ -1,8 +1,21 @@
-// import { Request, Response } from 'express';
-// import { Role } from './role.model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Role } from './role.model';
 
-// export const addRole = (req: Request, res: Response) => {
-//     const newRole: Role = req.body;
-//     // כאן תבצע את הלוגיקה להוספת התפקיד למסד הנתונים או לעיבוד נתונים אחר
-//     res.status(201).send('תפקיד נוסף בהצלחה');
-// };
+@Injectable({
+  providedIn: 'root'
+})
+export class RoleService {
+  private baseUrl = 'http://localhost:7072';
+
+  constructor(private http: HttpClient) { }
+
+  getAllRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(`${this.baseUrl}/roles`);
+  }
+
+  saveRole(role: Role): Observable<any> {
+    return this.http.post(`${this.baseUrl}/roles`, role);
+  }
+}

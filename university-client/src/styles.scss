@@ -1,22 +1,27 @@
-body{
-    background-color: #ededed;
-    // opacity: 0.2;
-}
-
-header{
+// Define a CSS variable for the background color of the body
+:root {
+    --background-color: #ededed; // Default background color
+  }
+  
+  body {
+    background-color: var(--background-color);
+  }
+  
+  header {
     margin-bottom: 1rem;
-}
-
-.turqiz.background {
-    background-color: var(--bs-secondary-bg-rgb), .5;
-}
-
-.turquoise{
+  }
+  
+  .turqiz.background {
+    background-color: rgba(var(--bs-secondary-bg-rgb), 0.5);
+  }
+  
+  .turquoise {
     color: rgb(51, 189, 175);
-}
-
-.radio-icon {
+  }
+  
+  .radio-icon {
     width: 1em;
     height: 1em;
     margin-right: 0.5em;
-}
+  }
+  

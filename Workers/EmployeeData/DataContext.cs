@@ -1,24 +1,16 @@
 ﻿using Employee.Core.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using Workers.Core.Models;
+using Workers;
 
-namespace Workers.Data
+public class DataContext : DbContext
 {
-    public class DataContext : DbContext
-    {
-        public DbSet<Worker> Workers { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<RoleName> RoleNames { get; set; }
+    public DbSet<Worker> Workers { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<RoleName> RoleNames { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Employees")
-                        ;//  .EnableRetryOnFailure(); // הוספת טיפול בשגיאות זמניות
-            optionsBuilder.LogTo(m => Debug.WriteLine(m));
-        }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Employees");
     }
 }

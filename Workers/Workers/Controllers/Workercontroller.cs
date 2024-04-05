@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 using Workers.Core.Models;
 using Workers.Core.Repositories;
-using Workers.Data;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Workers.Controllers
 {
@@ -13,27 +12,33 @@ namespace Workers.Controllers
     public class WorkersController : ControllerBase
     {
         private readonly IWorkerRepository _workerRepository;
-        private readonly DataContext _dataContext;
-        public WorkersController(IWorkerRepository workerRepository, DataContext dataContext)
+        private readonly IMapper _mapper;
+
+        public WorkersController(IWorkerRepository workerRepository, IMapper mapper)
         {
             _workerRepository = workerRepository;
-            _dataContext = dataContext;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(_workerRepository.GetAll());
+            var workers = await _workerRepository.GetAllAsync();
+            return Ok(workers);
         }
+
         [HttpGet("/all")]
-        public ActionResult GetAllEmployees()
+        [Produces("application/json")]
+        public async Task<IActionResult> GetAllEmployees()
         {
-            return Ok(_workerRepository.GetAllEmployees());
+            var employees = await _workerRepository.GetAllEmployeesAsync();
+            return Ok(employees);
         }
+
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var worker = _workerRepository.GetWorkerById(id);
+            var worker = await _workerRepository.GetWorkerByIdAsync(id);
             if (worker == null)
             {
                 return NotFound();
@@ -42,48 +47,34 @@ namespace Workers.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Worker worker)
+        public async Task<IActionResult> Post([FromBody] Worker worker)
         {
-            _workerRepository.Add(worker);
-
-            //foreach (var role in worker.Roles)
-            //{
-            //    role.EmployeeId = worker.id;
-            //    _dataContext.Roles.Add(role);
-            //}
-            _dataContext.SaveChanges();
-
-            return CreatedAtAction(nameof(Get), new { id = worker.Tz }, worker);
+            await _workerRepository.AddAsync(worker);
+            return CreatedAtAction(nameof(Get), new { id = worker.Id }, worker);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Worker worker)
+        public async Task<IActionResult> Put(int id, [FromBody] Worker worker)
         {
-            _workerRepository.Update(id, worker);
-            var existingRoles = _dataContext.Roles.Where(r => r.EmployeeId == id).ToList();
-            foreach (var role in existingRoles)
+            var existingWorker = await _workerRepository.GetWorkerByIdAsync(id);
+            if (existingWorker == null)
             {
-                _dataContext.Roles.Remove(role);
+                return NotFound();
             }
-            //foreach (var role in worker.Roles)
-            //{
-            //    role.EmployeeId = id;
-            //    _dataContext.Roles.Add(role);
-            //}
-            _dataContext.SaveChanges();
 
+            await _workerRepository.UpdateAsync(id, worker);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var worker = _workerRepository.GetWorkerById(id);
+            var worker = await _workerRepository.GetWorkerByIdAsync(id);
             if (worker == null)
             {
                 return NotFound();
             }
-            _workerRepository.Delete(id);
+            await _workerRepository.DeleteAsync(id);
             return Ok();
         }
     }

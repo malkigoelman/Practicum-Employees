@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Workers.Data;
 
 #nullable disable
 
@@ -41,11 +40,11 @@ namespace Employee.Data.Migrations
 
             modelBuilder.Entity("Workers.Core.Models.Role", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
@@ -53,47 +52,61 @@ namespace Employee.Data.Migrations
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
-                    b.Property<int>("NameId")
+                    b.Property<int>("NameID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Workerid")
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("WorkerId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("RoleId");
 
-                    b.HasIndex("NameId");
+                    b.HasIndex("NameID");
 
-                    b.HasIndex("Workerid");
+                    b.HasIndex("WorkerId");
 
                     b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Workers.Worker", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                    b.Property<DateTime>("BirthDay")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("F_name")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Gender")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("L_name")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Tz")
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Tz")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Workers");
                 });
@@ -102,13 +115,13 @@ namespace Employee.Data.Migrations
                 {
                     b.HasOne("Employee.Core.Models.RoleName", "Name")
                         .WithMany()
-                        .HasForeignKey("NameId")
+                        .HasForeignKey("NameID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Workers.Worker", null)
                         .WithMany("Roles")
-                        .HasForeignKey("Workerid");
+                        .HasForeignKey("WorkerId");
 
                     b.Navigation("Name");
                 });

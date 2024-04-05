@@ -4,13 +4,15 @@ import { EmployeesComponent } from '../modules/Employees/employees/employees.com
 import { AddEmployeeComponent } from '../modules/Employees/add-employee/add-employee.component';
 import { AllEmployeeComponent } from '../modules/Employees/all-employee/all-employee.component';
 import { EditEmployeeComponent } from '../modules/Employees/edit-employee/edit-employee.component';
+import { ToolsComponent } from '../modules/tools/tools.component';
 
 const routes: Routes = [
     { path: 'employees', component: EmployeesComponent },
     { path: 'add', component: AddEmployeeComponent },
     { path: 'all', component: AllEmployeeComponent },
     { path: 'edit/:id', component: EditEmployeeComponent },
-    { path: 'id', component: EmployeesComponent }
+    { path: 'id', component: EmployeesComponent },
+    { path: 'tool', component: ToolsComponent },
     // ניתן להוסיף נתיבים נוספים כאן לדפים נוספים באפליקציה
   ];
 

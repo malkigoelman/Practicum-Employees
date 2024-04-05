@@ -18,35 +18,29 @@ namespace Employee.Service
         {
             _roleRepository = roleRepository;
         }
-
-        public void Add(Role role)
+        public async Task AddAsync(Role role)
         {
-            _roleRepository.Add(role);
+            await _roleRepository.AddAsync(role);
         }
-
-        public void Add(RoleName name)
+        public async Task AddAsync(RoleName name)
         {
-            _roleRepository.Add(name);
+            await _roleRepository.AddAsync(name);
         }
-
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            _roleRepository.Delete(id);
+            await _roleRepository.DeleteAsync(id);
         }
-
-        public IEnumerable<Role> Get()
+        public async Task<IEnumerable<Role>> GetAsync()
         {
-            return _roleRepository.Get();
+            return await _roleRepository.GetAsync();
         }
-
-        public IEnumerable<RoleName> GetRoleNames()
+        public async Task<IEnumerable<RoleName>> GetRoleNamesAsync()
         {
-            return _roleRepository.GetRoleNames();
+            return await _roleRepository.GetRoleNamesAsync();
         }
-
-        public void Update(Role role)
+        public async Task UpdateAsync(Role role)
         {
-            _roleRepository.Update(role);
+            await _roleRepository.UpdateAsync(role);
         }
     }
 }

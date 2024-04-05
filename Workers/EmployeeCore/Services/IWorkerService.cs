@@ -9,11 +9,11 @@ namespace Employee.Core.Services
 {
     public interface IWorkerService
     {
-        IEnumerable<Worker> GetAll();
-        IEnumerable<Worker> GetAllEmployees();
-        Worker GetWorkerById(int id);
-        void Add(Worker worker);
-        void Update(int id, Worker worker);
-        void Delete(int id);
+        Task<IEnumerable<Worker>> GetAllAsync();
+        Task<IEnumerable<Worker>> GetAllEmployeesAsync();
+        Task<Worker> GetWorkerByIdAsync(int id);
+        Task AddAsync(Worker worker);
+        Task UpdateAsync(int id, Worker worker);
+        Task DeleteAsync(int id);
     }
 }
