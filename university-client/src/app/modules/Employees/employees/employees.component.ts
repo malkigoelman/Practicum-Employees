@@ -20,27 +20,20 @@ export class EmployeesComponent implements OnInit {
     this.getWorkers();
   }
   removeWorker(worker: Employee): void {
-    // Swal.fire({
-    //   title: `In this action you delete ${worker.f_name} ${worker.l_name} from the list of employees`,
-    //   showDenyButton: true,
-    //   showCancelButton: true,
-    //   confirmButtonText: "Yes",
-    //   denyButtonText: `No`
-    // }).then((result) => {
-    //   /* Read more about isConfirmed, isDenied below */
-    //   if (result.isConfirmed) {
-    //     Swal.fire("Deleted!", "", "success");
-    //   } else if (result.isDenied) {
-    //     Swal.fire("Changes are not saved", "", "info");
-    //   }
-    // });
     const id = worker.id;
     console.log(id);
-    this.employeesService.removeWorker(id)
+    this.employeesService.deleteWorker(id)
+      .subscribe(
+        () => {
           // this.workers = this.workers.filter(w => w !== worker);
-      ;
-      console.log(worker.active);
+          console.log('Worker deleted successfully.');
+        },
+        (error) => {
+          console.error('Error deleting worker:', error);
+        }
+      );
   }
+  
   getWorkers(): void {
     this.employeesService.getWorkers()
       .subscribe(

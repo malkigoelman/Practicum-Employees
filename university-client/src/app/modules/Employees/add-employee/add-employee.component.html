@@ -6,20 +6,20 @@
                     <div class="card-body">
                         <h5 class="card-title text-center turquoise">Add Employee</h5>
                         <div class="form-group  mb-3">
-                            <label for="f_name" class=""><i class="fas fa-user"></i> שם פרטי:</label>
+                            <label for="firstName" class=""><i class="fas fa-user"></i> שם פרטי:</label>
                             <input class="form-control "
-                                [ngClass]="{'is-invalid': userForm.get('f_name')?.touched && userForm.get('f_name')?.errors}"
-                                type="text" id="f_name" formControlName="f_name" name="f_name" />
-                            <div *ngIf="userForm.get('f_name')?.touched && userForm.get('f_name')?.errors">
+                                [ngClass]="{'is-invalid': userForm.get('firstName')?.touched && userForm.get('firstName')?.errors}"
+                                type="text" id="firstName" formControlName="firstName" name="firstName" />
+                            <div *ngIf="userForm.get('firstName')?.touched && userForm.get('firstName')?.errors">
                                 <div class="alert alert-danger">This field is required</div>
                             </div>
                         </div>
                         <div class="form-group  mb-3">
-                            <label for="l_name"><i class="fas fa-user"></i> משפחה:</label>
+                            <label for="lastName"><i class="fas fa-user"></i> משפחה:</label>
                             <input class="form-control"
-                                [ngClass]="{'is-invalid': userForm.get('l_name')?.touched && userForm.get('l_name')?.errors}"
-                                type="text" id="l_name" formControlName="l_name" name="l_name" />
-                            <div *ngIf="userForm.get('l_name')?.touched && userForm.get('l_name')?.errors">
+                                [ngClass]="{'is-invalid': userForm.get('lastName')?.touched && userForm.get('lastName')?.errors}"
+                                type="text" id="lastName" formControlName="lastName" name="lastName" />
+                            <div *ngIf="userForm.get('lastName')?.touched && userForm.get('lastName')?.errors">
                                 <div class="alert alert-danger">This field is required</div>
                             </div>
                         </div>

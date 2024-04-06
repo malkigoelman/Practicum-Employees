@@ -4399,7 +4399,7 @@ function assertNodeInjector(lView, injectorIndex) {
   ], "injectorIndex should point to parent injector");
 }
 var SVG_NAMESPACE = "svg";
-var MATH_ML_NAMESPACE = "math";
+var MATH_MlastNameSPACE = "math";
 var _ensureDirtyViewsAreAlwaysReachable = false;
 function getEnsureDirtyViewsAreAlwaysReachable() {
   return _ensureDirtyViewsAreAlwaysReachable;
@@ -4823,7 +4823,7 @@ function ɵɵnamespaceSVG() {
   instructionState.lFrame.currentNamespace = SVG_NAMESPACE;
 }
 function ɵɵnamespaceMathML() {
-  instructionState.lFrame.currentNamespace = MATH_ML_NAMESPACE;
+  instructionState.lFrame.currentNamespace = MATH_MlastNameSPACE;
 }
 function ɵɵnamespaceHTML() {
   namespaceHTMLInternal();
@@ -13278,7 +13278,7 @@ function toRefArray(map2) {
 }
 function getNamespace(elementName) {
   const name = elementName.toLowerCase();
-  return name === "svg" ? SVG_NAMESPACE : name === "math" ? MATH_ML_NAMESPACE : null;
+  return name === "svg" ? SVG_NAMESPACE : name === "math" ? MATH_MlastNameSPACE : null;
 }
 var ChainedInjector = class {
   constructor(injector, parentInjector) {

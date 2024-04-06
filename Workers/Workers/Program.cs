@@ -1,23 +1,25 @@
 using Employee.Api;
-using Employee.Core;
 using Employee.Core.Repositories;
 using Employee.Core.Services;
+using Employee.Core;
 using Employee.Data.Ropsitories;
 using Employee.Service;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
 using Workers.Core.Repositories;
 using Workers.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("http://localhost:4200"));
+        builder => builder
+            .WithOrigins("http://localhost:4200") // מקורות מורשים
+            .AllowAnyMethod() // אפשר כל מתודה (GET, POST, PUT, DELETE וכו')
+            .AllowAnyHeader() // אפשר כל כותרת
+            .AllowCredentials()); // אפשר קובצי Cookie מהמקור
 });
+
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -25,18 +27,17 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.WriteIndented = true;
 });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//כאן צריך להוסיף
+// Add DbContext and repositories
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 builder.Services.AddScoped<IWorkerService, WorkerService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddDbContext<DataContext>();
 
+// Add AutoMapper
 builder.Services.AddAutoMapper(typeof(ApiMappingProfile), typeof(MappingProfile));
 
 var app = builder.Build();
@@ -50,7 +51,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// הוסף את השירות של CORS לאחר חיבור HTTPS ולפני האימות והניווט
+
 app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthorization();

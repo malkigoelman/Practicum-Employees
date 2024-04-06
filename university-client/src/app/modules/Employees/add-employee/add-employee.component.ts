@@ -28,8 +28,8 @@ export class AddEmployeeComponent implements OnInit {
   ngOnInit(): void {
     // הגדרת הטופס עם FormBuilder
     this.userForm = this.fb.group({
-      f_name: ['', Validators.required], // שם פרטי חובה
-      l_name: ['', Validators.required], // שם משפחה חובה
+      firstName: ['', Validators.required], // שם פרטי חובה
+      lastName: ['', Validators.required], // שם משפחה חובה
       tz: ['', Validators.required], // תעודת זהות חובה
       birthDay: ['', Validators.required], // תאריך לידה חובה
       startDate: ['', Validators.required], // תאריך התחלה חובה

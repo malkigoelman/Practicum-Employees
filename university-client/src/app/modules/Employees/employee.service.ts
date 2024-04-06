@@ -20,12 +20,12 @@ export class EmployeesService {
     addWorker(worker: Employee): Observable<Employee> {
       return this._http.post<Employee>(this._baseUrl, worker); // הוספת עובד לשרת
     }
-    removeWorker(id: number): Observable<void> {
-      const url = `${this._baseUrl}/${id}`
-      return this._http.delete<void>(url);
+    deleteWorker(id: number): Observable<void> {
+      return this._http.delete<void>(`https://localhost:7027/api/Workers/${id}`);
     }
+    
     editWorker(employee:Employee):Observable<Employee>{
-      const url=`${this._baseUrl}/${employee.tz}`;
+      const url=`${this._baseUrl}/${employee.id}`;
       return this._http.put<Employee>(url,employee);  
       // return this._http.put<Employee>(`https://localhost:7027/api/Workers/${employee.id}`,employee);  
     }
