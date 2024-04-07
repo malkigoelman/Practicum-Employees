@@ -1,67 +1,73 @@
 {
-  "hash": "0faffdd7",
-  "configHash": "eda9dcbc",
+  "hash": "4ff3d05f",
+  "configHash": "fcda4198",
   "lockfileHash": "07dae18b",
-  "browserHash": "c210d881",
+  "browserHash": "85f5f5bc",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "8c227b16",
+      "fileHash": "8ecb8b2c",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "763a59e9",
+      "fileHash": "cb10bf80",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "a40364f4",
+      "fileHash": "297b0397",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "db86a43b",
+      "fileHash": "c4b49b76",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "07c429bc",
+      "fileHash": "fde1d300",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "29c55d86",
+      "fileHash": "6e2f29a5",
       "needsInterop": false
     },
     "xlsx": {
       "src": "../../../../../node_modules/xlsx/xlsx.mjs",
       "file": "xlsx.js",
-      "fileHash": "127e28de",
+      "fileHash": "28a68942",
       "needsInterop": false
+    },
+    "sweetalert2": {
+      "src": "../../../../../node_modules/sweetalert2/dist/sweetalert2.all.js",
+      "file": "sweetalert2.js",
+      "fileHash": "4a376793",
+      "needsInterop": true
     }
   },
   "chunks": {
-    "chunk-5EASOZMP": {
-      "file": "chunk-5EASOZMP.js"
+    "chunk-BXY6ZOIQ": {
+      "file": "chunk-BXY6ZOIQ.js"
     },
-    "chunk-26UNAOCA": {
-      "file": "chunk-26UNAOCA.js"
+    "chunk-G7EHM7JF": {
+      "file": "chunk-G7EHM7JF.js"
     },
-    "chunk-V422C23J": {
-      "file": "chunk-V422C23J.js"
+    "chunk-HHZ4FQTA": {
+      "file": "chunk-HHZ4FQTA.js"
     },
-    "chunk-FLSSFABL": {
-      "file": "chunk-FLSSFABL.js"
+    "chunk-BITAGTGM": {
+      "file": "chunk-BITAGTGM.js"
     },
-    "chunk-J4B6MK7R": {
-      "file": "chunk-J4B6MK7R.js"
+    "chunk-WKYGNSYM": {
+      "file": "chunk-WKYGNSYM.js"
     }
   }
 }

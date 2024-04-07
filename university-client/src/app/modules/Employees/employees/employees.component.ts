@@ -4,6 +4,7 @@ import { EmployeesService } from '../employee.service';
 import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
+import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 
 @Component({
   selector: 'app-employees',
@@ -12,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class EmployeesComponent implements OnInit {
 
+  @ViewChild('content') content: AddEmployeeComponent;
+
   workers: Employee[]; // מערך לאחסון העובדים
 
   constructor(private employeesService: EmployeesService, private router: Router) { }
@@ -19,20 +22,37 @@ export class EmployeesComponent implements OnInit {
   ngOnInit(): void {
     this.getWorkers();
   }
+ 
   removeWorker(worker: Employee): void {
     const id = worker.id;
     console.log(id);
-    this.employeesService.deleteWorker(id)
-      .subscribe(
-        () => {
-          // this.workers = this.workers.filter(w => w !== worker);
-          console.log('Worker deleted successfully.');
-        },
-        (error) => {
-          console.error('Error deleting worker:', error);
-        }
-      );
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed deletion
+        this.employeesService.deleteWorker(id)
+          .subscribe(
+            () => {
+              this.workers = this.workers.filter(w => w !== worker); // מחיקת העובד מהרשימה
+              console.log('Worker deleted successfully.');
+              Swal.fire('Deleted!', 'Your file has been deleted.', 'success'); // הצגת הודעת אישור
+            },
+            (error) => {
+              console.error('Error deleting worker:', error);
+              Swal.fire('Error', 'There was an error deleting the worker.', 'error'); // הצגת הודעת שגיאה
+            }
+          );
+      }
+    });
   }
+
   
   getWorkers(): void {
     this.employeesService.getWorkers()

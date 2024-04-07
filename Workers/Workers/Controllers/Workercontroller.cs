@@ -77,5 +77,16 @@ namespace Workers.Controllers
             await _workerRepository.DeleteAsync(id);
             return Ok();
         }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> Search(string searchString)
+        {
+            var workers = await _workerRepository.SearchAsync(searchString);
+            if (workers == null || !workers.Any())
+            {
+                return NotFound();
+            }
+            return Ok(workers);
+        }
     }
 }

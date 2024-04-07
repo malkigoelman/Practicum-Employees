@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,6 @@ namespace Workers.Core.Repositories
         Task AddAsync(Worker worker);
         Task UpdateAsync(int id, Worker worker);
         Task DeleteAsync(int id);
+        Task<IEnumerable<Worker>> SearchAsync(string searchString);
     }
 }

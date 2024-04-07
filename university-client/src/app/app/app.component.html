@@ -11,7 +11,23 @@
                         <a class="nav-link" routerLink="/tool" (mouseover)="showSettings()" (mouseleave)="hideSettings()">⚙</a>
                         <span *ngIf="isHovering" class="tooltip">הגדרות</span>
                     </li>
-                   
+                   <li>
+                    <div>
+                        <input type="text" [(ngModel)]="searchText" placeholder="חיפוש...">
+                        <button class="btn btn-primary" (click)="searchEmployees()">חפש</button>
+                      </div>
+                      
+                      <div *ngIf="searchResults.length > 0">
+                        <h3>תוצאות חיפוש:</h3>
+                        <ul>
+                          <li *ngFor="let result of searchResults">
+                            {{ result.firstName }} {{ result.lastName }}
+                            <!-- כאן תוכל להוסיף כפתורים או פעולות נוספות לכל תוצאה -->
+                          </li>
+                        </ul>
+                      </div>
+                      
+                   </li>
                 </ul>
             </div>
         </div>

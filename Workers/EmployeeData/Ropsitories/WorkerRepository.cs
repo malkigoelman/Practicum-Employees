@@ -66,6 +66,16 @@ namespace Employee.Data.Ropsitories
             }
             return null;
         }
+        public async Task<IEnumerable<Worker>> SearchAsync(string searchString)
+        {
+            return await _dataContext.Workers
+                .Where(w =>
+                    w.FirstName.Contains(searchString) ||
+                    w.LastName.Contains(searchString) ||
+                    w.Email.Contains(searchString) ||
+                    w.Tz.Contains(searchString))
+                .ToListAsync();
+        }
 
     }
 }

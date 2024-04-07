@@ -24,7 +24,6 @@ export class EmployeesService {
   deleteWorker(id: number): Observable<void> {
     return this._http.delete<void>(`https://localhost:7027/api/Workers/${id}`);
   }
-
   editWorker(employee: Employee): Observable<Employee> {
     const url = `${this._baseUrl}/${employee.id}`;
     // const url = `${this._baseUrl}/1`;
@@ -46,4 +45,8 @@ export class EmployeesService {
     const url = `${this._baseUrl}/${id}`;
     return this._http.get<Employee>(url);
   }
+  searchEmployees(s:string){
+
+  }
+
 }

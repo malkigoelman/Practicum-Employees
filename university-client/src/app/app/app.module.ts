@@ -15,6 +15,7 @@ import { ToolsComponent } from "../modules/tools/tools.component";
         BrowserModule,
         HttpClientModule,
         FormsModule,
+        // NgModule,
         ReactiveFormsModule,
         EmployeesModule,
         AppRoutingModule
