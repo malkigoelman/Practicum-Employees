@@ -1,90 +1,84 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <div class="container mt-5 ">
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title text-center turquoise">Add Employee</h5>
-                        <div class="form-group  mb-3">
-                            <label for="firstName" class=""><i class="fas fa-user"></i> שם פרטי:</label>
-                            <input class="form-control "
-                                [ngClass]="{'is-invalid': userForm.get('firstName')?.touched && userForm.get('firstName')?.errors}"
-                                type="text" id="firstName" formControlName="firstName" name="firstName" />
+                        <div class="form-group mb-3">
+                            <label for="firstName"><i class="fas fa-user"></i> שם פרטי:</label>
+                            <input class="form-control" type="text" id="firstName" formControlName="firstName" />
                             <div *ngIf="userForm.get('firstName')?.touched && userForm.get('firstName')?.errors">
                                 <div class="alert alert-danger">This field is required</div>
                             </div>
                         </div>
-                        <div class="form-group  mb-3">
+                        <div class="form-group mb-3">
                             <label for="lastName"><i class="fas fa-user"></i> משפחה:</label>
-                            <input class="form-control"
-                                [ngClass]="{'is-invalid': userForm.get('lastName')?.touched && userForm.get('lastName')?.errors}"
-                                type="text" id="lastName" formControlName="lastName" name="lastName" />
+                            <input class="form-control" type="text" id="lastName" formControlName="lastName" />
                             <div *ngIf="userForm.get('lastName')?.touched && userForm.get('lastName')?.errors">
                                 <div class="alert alert-danger">This field is required</div>
                             </div>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="id"><i class="fas fa-user"></i>תעודת זהות:</label>
-                            <input class="form-control"
-                                [ngClass]="{'is-invalid': userForm.get('id')?.touched && userForm.get('id')?.errors}"
-                                type="text" id="id" formControlName="id" name="id" />
-                            <div *ngIf="userForm.get('id')?.touched && userForm.get('id')?.errors">
+                            <label for="tz"><i class="fas fa-user"></i>תעודת זהות:</label>
+                            <input class="form-control" type="text" id="tz" formControlName="tz" />
+                            <div *ngIf="userForm.get('tz')?.touched && userForm.get('tz')?.errors">
                                 <div class="alert alert-danger">This field is required</div>
                             </div>
                         </div>
                         <div class="form-group mb-3">
                             <label for="startDate"><i class="fas fa-user"></i> תאריך תחילת העבודה</label>
-                            <input class="form-control"
-                                [ngClass]="{'is-invalid': userForm.get('startDate')?.touched && userForm.get('startDate')?.errors}"
-                                type="date" id="startDate" formControlName="startDate" name="startDate" />
+                            <input class="form-control" type="date" id="startDate" formControlName="startDate" />
                             <div *ngIf="userForm.get('startDate')?.touched && userForm.get('startDate')?.errors">
                                 <div class="alert alert-danger">This field is required</div>
                             </div>
                         </div>
                         <div class="form-group mb-3">
                             <label for="birthDay"><i class="fas fa-user"></i>תאריך לידה:</label>
-                            <input class="form-control"
-                                [ngClass]="{'is-invalid': userForm.get('birthDay')?.touched && userForm.get('birthDay')?.errors}"
-                                type="date" id="birthDay" formControlName="birthDay" name="birthDay" />
+                            <input class="form-control" type="date" id="birthDay" formControlName="birthDay" />
                             <div *ngIf="userForm.get('birthDay')?.touched && userForm.get('birthDay')?.errors">
                                 <div class="alert alert-danger">This field is required</div>
                             </div>
                         </div>
-
-                        <div class="form-group  mb-3">
-                            <label for="gender"><i class="fas fa-venus-mars"></i> מגדר:</label>
-                            <select class="form-control" id="gender" [(ngModel)]="newWorker.gender" name="gender"
-                                required>
+                        <div class="form-group mb-3">
+                            <label for="Gender"><i class="fas fa-venus-mars"></i> מגדר:</label>
+                            <select class="form-control" id="Gender" formControlName="Gender" required>
                                 <option value="male">זכר</option>
                                 <option value="female">נקבה</option>
                             </select>
                         </div>
-                        <div *ngFor="let role of newWorker.roles; let i = index">
-                            <div class="form-group mb-3">
-                                <label for="roleName">שם התפקיד:</label>
-                                <input type="text" class="form-control" id="roleName" [(ngModel)]="role.name"
-                                    name="roleName" required>
+                        <!-- <div class="form-group mb-3">
+                            <label for="email"><i class="fas fa-user"></i> email :</label>
+                            <input class="form-control" type="string" id="email" formControlName="email" />
+                            <div *ngIf="userForm.get('email')?.touched && userForm.get('email')?.errors">
+                                <div class="alert alert-danger">This field is required</div>
                             </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">ניהול</label>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="startDate"><i class="fas fa-user"></i> תאריך תחילת העבודה</label>
-                                <input class="form-control"
-                                    [ngClass]="{'is-invalid': userForm.get('startDate')?.touched && userForm.get('startDate')?.errors}"
-                                    type="date" id="startDate" formControlName="startDate" name="startDate" />
-                                <div *ngIf="userForm.get('startDate')?.touched && userForm.get('startDate')?.errors">
-                                    <div class="alert alert-danger">This field is required</div>
+                        </div> -->
+                        <!-- חלק של התפקידים -->
+                        <!-- <div formArrayName="Roles">
+                            <div *ngFor="let role of userForm.get('Roles')?.controls; let i = index">
+                                <div [formGroupName]="i">
+                                    <div class="form-group mb-3">
+                                        <label for="roleName{{i}}">שם התפקיד:</label>
+                                        <input type="text" class="form-control" id="roleName{{i}}"
+                                            formControlName="roleName" required>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                            id="flexSwitchCheckDefault{{i}}">
+                                        <label class="form-check-label" for="flexSwitchCheckDefault{{i}}">ניהול</label>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="startDate{{i}}"><i class="fas fa-user"></i> תאריך תחילת העבודה</label>
+                                        <input class="form-control" type="date" id="startDate{{i}}"
+                                            formControlName="startDate" required>
+                                    </div>
+                                    <button type="button" class="btn btn-danger" (click)="removeRole(i)">ביטול תפקיד</button>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-danger" (click)="removeRole(i)">ביטול תפקיד</button>
-                        </div>
-                        <button type="button" class="btn btn-primary" (click)="addRole()">הוסף תפקיד </button>
-                        <!-- <button type="submit" class="btn btn-primary rounded-button"><i class="fas fa-save"></i>שמור</button> -->
-    <button type="button" class="btn btn-primary" (click)="saveRole()" [disabled]="!roleForm.valid || !isStartDateValid()">Save</button>
-
+                        </div> -->
+                        <button type="button" class="btn btn-primary" (click)="addRole()">הוסף תפקיד</button>
+                        <button type="submit" class="btn btn-primary">שמור</button>
                     </div>
                 </div>
             </div>

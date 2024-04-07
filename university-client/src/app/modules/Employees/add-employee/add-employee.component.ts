@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee, Role } from '../models/employee.model';
+import { Employee } from '../models/employee.model';
 import { EmployeesService } from '../employee.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RoleService } from '../../role/role.service';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-add-employee',
@@ -11,87 +10,63 @@ import { RoleService } from '../../role/role.service';
 })
 export class AddEmployeeComponent implements OnInit {
 
-  newWorker: Employee = new Employee(); // יצירת מופע חדש של עובד
+  newWorker: Employee = new Employee();
   userForm: FormGroup;
-  isActive: boolean = true;
-  roles: Role[] = [];
+  isactive: boolean = true;
 
-  constructor(private employeesService: EmployeesService, private fb: FormBuilder,private roleService:RoleService) {
-    this.roleForm=this.fb.group({
-      roleName:['',Validators.required],
-      isAdmin:[false,Validators.required],
-      startDate: ['', Validators.required]
-    });
-    this.loadRoles();
-   }
+  constructor(private employeesService: EmployeesService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    // הגדרת הטופס עם FormBuilder
     this.userForm = this.fb.group({
-      firstName: ['', Validators.required], // שם פרטי חובה
-      lastName: ['', Validators.required], // שם משפחה חובה
-      tz: ['', Validators.required], // תעודת זהות חובה
-      birthDay: ['', Validators.required], // תאריך לידה חובה
-      startDate: ['', Validators.required], // תאריך התחלה חובה
-      gender: ['male', Validators.required], // מגדר חובה
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      tz: ['', Validators.required],
+      birthDay: ['', Validators.required],
+      startDate: ['', Validators.required],
+      Gender: ['male', Validators.required],
+      Roles: this.fb.array([])
     });
   }
-  saveEmployee(): void {
-    this.newWorker.active = this.isActive;
-  }
-  addRole(): void {
-    this.newWorker.roles.push({ name: '', isAdmin: false, startDate: null });
-  }
-  removeRole(index: number): void {
-    this.newWorker.roles.splice(index, 1);
-  }
-  saveRole() {
-    if (this.roleForm.valid) {
-      const roleName = this.roleForm.value.roleName;
-      if (this.roles.some(role => role.name === roleName)) {
-        alert('Role already exists');
-      } else {
-        this.roleService.saveRole(this.roleForm.value).subscribe(
-          (data: any) => {
-            alert('Role added successfully');
-            this.roleForm.reset();
-            this.loadRoles();
-          },
-          (error: any) => {
-            console.error('Error saving role:', error);
-          }
-        );
-      }
-    }
-  }
-  isStartDateValid() {
-    const startDate = new Date(this.roleForm.value.startDate);
-    const currentDate = new Date();
-    return startDate <= currentDate;
-  }
-  roleForm: FormGroup;
 
-  loadRoles() {
-    this.roleService.getAllRoles().subscribe(
-      // (data: Role[]) => {
-      //   this.roles = data;
-      // },
-      (error: any) => {
-        console.error('Error loading roles:', error);
-      }
-    );
+  addRole(): void {
+    const roleGroup = this.fb.group({
+      roleName: ['', Validators.required],
+      isAdmin: [false, Validators.required],
+      startDate: ['', Validators.required]
+    });
+    (this.userForm.get('Roles') as FormArray).push(roleGroup);
   }
+
+  removeRole(index: number): void {
+    (this.userForm.get('Roles') as FormArray).removeAt(index);
+  }
+
   onSubmit(): void {
-    this.newWorker.active = this.isActive;
-    console.log(this.newWorker);
-    this.employeesService.addWorker(this.newWorker)
+    // Create an object in the format expected by the server
+    const workerData = {
+      firstName: this.userForm.value.firstName,
+      lastName: this.userForm.value.lastName,
+      tz: this.userForm.value.tz,
+      birthDay: this.userForm.value.birthDay,
+      startDate: this.userForm.value.startDate,
+      gender: this.userForm.value.Gender,
+      // email: this.userForm.value.email,
+      email:"ghjk@gmail.com" ,
+      roles: this.userForm.value.Roles,
+      isActive:true,
+      id:0
+    };
+  
+    this.employeesService.addWorker(workerData)
       .subscribe(
         (response) => {
           console.log('Worker added successfully:', response);
-        },
-        (error) => {
-          console.error('Failed to add worker:', error);
         }
+        // ,
+        // (error) => {
+        //   console.error('Failed to add worker:', error);
+        // }
       );
   }
+  
 }

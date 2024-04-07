@@ -21846,7 +21846,7 @@ function write_names_xlml(wb) {
   }
   return writextag("Names", out.join(""));
 }
-function write_ws_xlmlastNames(ws, opts, idx, wb) {
+function write_ws_xlml_names(ws, opts, idx, wb) {
   if (!ws)
     return "";
   if (!((wb || {}).Workbook || {}).Names)
@@ -22060,7 +22060,7 @@ function write_ws_xlml(idx, opts, wb) {
   var o = [];
   var s = wb.SheetNames[idx];
   var ws = wb.Sheets[s];
-  var t = ws ? write_ws_xlmlastNames(ws, opts, idx, wb) : "";
+  var t = ws ? write_ws_xlml_names(ws, opts, idx, wb) : "";
   if (t.length > 0)
     o.push("<Names>" + t + "</Names>");
   t = ws ? write_ws_xlml_table(ws, opts, idx, wb) : "";
@@ -30445,8 +30445,8 @@ function parse_content_xml(d, _opts) {
         break;
       case "list-level-properties":
         break;
-      case "sender-firstName":
-      case "sender-lastName":
+      case "sender-firstname":
+      case "sender-lastname":
       case "sender-initials":
       case "sender-title":
       case "sender-position":

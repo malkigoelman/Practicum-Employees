@@ -21,6 +21,7 @@ namespace Employee.Data.Ropsitories
         }
         public async Task DeleteAsync(int id)
         {
+            
             var worker = await GetWorkerByIdAsync(id);
             if (worker != null)
             {

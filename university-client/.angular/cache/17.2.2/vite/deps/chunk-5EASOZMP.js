@@ -1393,13 +1393,13 @@ var AngularProfiler = class {
     return new ChangeDetectionPerfRecord(msPerTick, numTicks);
   }
 };
-var PROFILER_GLOBAlastName = "profiler";
+var PROFILER_GLOBAL_NAME = "profiler";
 function enableDebugTools(ref) {
-  exportNgVar(PROFILER_GLOBAlastName, new AngularProfiler(ref));
+  exportNgVar(PROFILER_GLOBAL_NAME, new AngularProfiler(ref));
   return ref;
 }
 function disableDebugTools() {
-  exportNgVar(PROFILER_GLOBAlastName, null);
+  exportNgVar(PROFILER_GLOBAL_NAME, null);
 }
 var By = class {
   /**

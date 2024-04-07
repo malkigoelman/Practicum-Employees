@@ -1,49 +1,53 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-<button (click)="exportXSLX()">להורדת פרטי העובדים</button>
-<button (click)="exportXSLXToMail()">לשליחת פרטי העובדים</button>
+<button type="button" class="btn btn-outline-primary"(click)="exportXSLX()">להורדת פרטי העובדים</button>
 <div class="container mt-25">
   <div class="row justify-content-center">
     <div class="col-md-25">
       <div class="card">
         <div class="card-body">
           <h2 class="card-title text-center turquoise">רשימת העובדים</h2>
-          <table #table class="table table-striped" style="font-family:'Arial', sans-serif;">
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col"><i class="fas fa-user"></i> שם פרטי</th>
-                  <th scope="col"><i class="fas fa-user"></i> שם משפחה</th>
-                  <th scope="col"><i class="fas fa-id-card"></i> תעודת זהות</th>
-                  <th scope="col"><i class="fas fa-save"></i> תאריך תחילת העבודה </th>
-                  <th scope="col"><i class="fas fa-cogs"></i> פעולות</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let worker of workers">
-                  <td></td>
-                  <td>{{worker.firstName}}</td>
-                  <td>{{worker.lastName}}</td>
-                  <td>{{worker.tz}}</td>
-                  <td>{{worker.startDate}}</td><!--כאן צריך להיות תאריך-->
-                  <td>
-                    <button class="btn btn-primary mr-2" (click)="editWorker(worker)">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn btn-danger " (click)="removeWorker(worker)">
-                      <i class="fas fa-trash-alt"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <button class="btn btn-primary mt-2" (click)="addWorker()">
-              <i class="fas fa-plus"></i>
-            </button>
-          </div>
+          <table #table class="table" style="font-family:'Arial', sans-serif;">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col"><i class="fas fa-user"></i> שם פרטי</th>
+                <th scope="col"><i class="fas fa-user"></i> שם משפחה</th>
+                <th scope="col"><i class="fas fa-id-card"></i> תעודת זהות</th>
+                <th scope="col"><i class="fas fa-save"></i> תאריך תחילת העבודה </th>
+                <th scope="col"><i class="fas fa-cogs"></i> פעולות</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              <tr *ngFor="let worker of workers; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ worker.firstName }}</td>
+                <td>{{ worker.lastName }}</td>
+                <td>{{ worker.tz }}</td>
+                <td>{{ worker.startDate }}</td>
+                <td>
+                  <button class="btn btn-outline-primary" (click)="editWorker(worker)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-outline-primary" (click)="removeWorker(worker)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <button class="btn btn-outline-primary" (click)="sendEmailToEmployee(worker)">
+                    <i class="bi bi-envelope"></i>
+                  </button>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+          <button class="btn btn-primary mt-2" (click)="addWorker()">
+            <i class="fas fa-plus"></i>
+          </button>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -6,7 +6,7 @@ export class Employee{
     public birthDay:Date;
     public startDate:Date;
     public gender:Gender;
-    public active:boolean;
+    public isActive:boolean;
     public email:string;
     public roles: Role[]; // מערך של תפקידים
 
@@ -18,7 +18,7 @@ export enum Gender{
     Male,Female
 }
 export class Role {
-    public name: string;
+    public  name: string;
     public isAdmin: boolean;
     public startDate:Date;
 }

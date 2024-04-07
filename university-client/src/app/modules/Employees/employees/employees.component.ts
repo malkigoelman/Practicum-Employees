@@ -61,16 +61,16 @@ export class EmployeesComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, name);
   }
-  exportXSLXToMail() {
-    const name = 'Employees.xlsx';
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.table.nativeElement);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    const data: Blob = new Blob([this.sheetToArrayBuffer(wb)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    const url = window.URL.createObjectURL(data);
-    window.open(`mailto:?subject=קובץ%20עובדים&body=צרופה%20נמצאת%20בקובץ%20בפורמט%20XLSX.%0D%0A%0D%0Aאנא%20המשך%20לשליחת%20המייל%20עם%20הקובץ%20המצורף%20לך.%0D%0A%0D%0Aבברכה%2C%0D%0Aהצוות%20שלנו`, '_blank');
-    window.location.href = url;
+  sendEmailToEmployee(employee:Employee): void {
+    const subject = encodeURIComponent('רשימת התפקידים שלך');
+    let body = 'רשימת התפקידים שלך:\n\n';
+    // employee.roles.forEach((role, index) => {
+    //   body += `${index + 1}. ${role.name}\n`;
+    // });
+    const mailtoLink = `mailto:${employee.email}?subject=${subject}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoLink, '_blank');
   }
+   
 
   sheetToArrayBuffer(workbook: XLSX.WorkBook): ArrayBuffer {
     const wbout: ArrayBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });

@@ -5,16 +5,17 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { EmployeesComponent } from "./employees/employees.component";
 import { EmployeesService } from "./employee.service";
+import { AllEmployeeComponent } from "./all-employee/all-employee.component";
 
 @NgModule({
     imports: [
-        CommonModule,
+        CommonModule, 
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forChild([{ path: '', component: EmployeesComponent }])
     ],
-    declarations: [EmployeesComponent],
-    providers: [EmployeesService] // ייבוא של שירות העובדים
+    declarations: [EmployeesComponent, AllEmployeeComponent],
+    providers: [EmployeesService] // רק שירות יופיע כאן
 })
 export class EmployeesModule {}

@@ -1,27 +1,28 @@
 <div>
   <h2>Edit Employee</h2>
   <form (ngSubmit)="saveChanges()">
-    <div class="form-group">
-      <label for="firstName"><i class="fas fa-user"></i> First Name:</label>
-      <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName" required>
-    </div>
+    <div *ngIf="employee">
+      <div class="form-group">
+        <label for="firstName"><i class="fas fa-user"></i> First Name:</label>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName" required>
+      </div>
     <div class="form-group">
       <label for="lastName"><i class="fas fa-user"></i> Last Name:</label>
       <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName" required>
     </div>
     <div class="form-group">
-      <label for="tz"><i class="fas fa-id-card"></i> Tz:</label>
+      <label for="tz"><i class="fas fa-id-card"></i> tz:</label>
       <input type="text" class="form-control" id="tz" [(ngModel)]="employee.tz" name="tz" required>
     </div>
     <div class="form-group">
-      <label for="gender"><i class="fas fa-venus-mars"></i> Gender:</label>
-      <select class="form-control" id="gender" [(ngModel)]="employee.gender" name="gender" required>
+      <label for="Gender"><i class="fas fa-venus-mars"></i> Gender:</label>
+      <select class="form-control" id="Gender" [(ngModel)]="employee.gender" name="Gender" required>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="email"><i class="fas fa-id-card"></i> Email:</label>
+      <label for="email"><i class="fas fa-id-card"></i> email:</label>
       <input type="text" class="form-control" id="email" [(ngModel)]="employee.email" name="email" required>
     </div>
     <div class="form-group">
@@ -29,12 +30,12 @@
       <input type="date" class="form-control" id="startDate" [(ngModel)]="employee.startDate" name="startDate" required>
     </div>
     <div class="form-group">
-      <label for="birthDay"><i class="fas fa-id-card"></i> BirthDay:</label>
+      <label for="birthDay"><i class="fas fa-id-card"></i> birthDay:</label>
       <input type="date" class="form-control" id="birthDay" [(ngModel)]="employee.birthDay" name="birthDay" required>
     </div>
     <div class="form-group">
-      <label for="active"><i class="fas fa-check-circle"></i> Active:</label>
-      <input type="checkbox" class="form-control" id="active" [(ngModel)]="employee.active" name="active">
+      <label for="active"><i class="fas fa-check-circle"></i> active:</label>
+      <input type="checkbox" class="form-control" id="active" [(ngModel)]="employee.isActive" name="active">
     </div>
     <div *ngFor="let role of employee.roles; let i = index">
       <div class="form-group">
@@ -51,5 +52,7 @@
     </div>
     <button type="button" class="btn btn-primary" (click)="addRole()">Add Role</button>
     <button type="submit" class="btn btn-primary">Save Changes</button>
+  </div>
+
   </form>
 </div>
