@@ -14,13 +14,10 @@ namespace Employee.Api.Controllers
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _roleService;
-        private readonly IMapper _mapper;
 
-
-        public RoleController(IRoleService roleService,IMapper mapper)
+        public RoleController(IRoleService roleService)
         {
             _roleService = roleService;
-            _mapper = mapper;   
         }
 
         [HttpGet]

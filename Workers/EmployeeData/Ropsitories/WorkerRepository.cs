@@ -50,7 +50,7 @@ namespace Employee.Data.Ropsitories
         {
             return await _dataContext.Workers.FirstOrDefaultAsync(w => w.Id == id);
         }
-        public async Task UpdateAsync(int id, Worker worker)
+        public async Task<Worker> UpdateAsync(int id, Worker worker)
         {
             Worker existingWorker =await GetWorkerByIdAsync(id);
             if (existingWorker != null)
@@ -67,6 +67,7 @@ namespace Employee.Data.Ropsitories
                 existingWorker.IsActive = worker.IsActive;
                 _dataContext.SaveChanges();
             }
+            return existingWorker;
         }
         public async Task<IEnumerable<Role>> GetWorkerRolesAsync(int id)
         {

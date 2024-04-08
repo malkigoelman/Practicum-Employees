@@ -9,7 +9,6 @@ namespace Employee.Core.DTOs
 {
     public class RoleDto
     {
-        //public int Id { get; set; }
         public RoleName Name { get; set; }
         public DateTime StartDate { get; set; }
         public bool IsAdmin { get; set; }

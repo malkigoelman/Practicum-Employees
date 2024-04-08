@@ -14,8 +14,9 @@ namespace Employee.Core.Services
         Task<IEnumerable<Worker>> GetAllEmployeesAsync();
         Task<Worker> GetWorkerByIdAsync(int id);
         Task AddAsync(Worker worker);
-        Task UpdateAsync(int id, Worker worker);
+        Task<Worker> UpdateAsync(int id, Worker worker);
         Task DeleteAsync(int id);
         Task UpdateStatusAsync(int id);
+        Task<IEnumerable<Worker>> SearchAsync(string s);
     }
 }
