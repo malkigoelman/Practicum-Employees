@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from '../models/employee.model';
-import { EmployeesService } from '../employee.service';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { EmployeesService } from '../employee.service';
+import { Employee, Role } from '../models/employee.model';
 
 @Component({
   selector: 'app-add-employee',
@@ -9,11 +9,9 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
   styleUrls: ['./add-employee.component.css']
 })
 export class AddEmployeeComponent implements OnInit {
-
-  
-  newWorker: Employee = new Employee();
   userForm: FormGroup;
-  isactive: boolean = true;
+  rolesType: Role[] = []; // רשימת סוגי התפקידים שתוחזר מהשרת
+  roles: FormArray; // מערך התפקידים בטופס
 
   constructor(private employeesService: EmployeesService, private fb: FormBuilder) { }
 
@@ -24,50 +22,61 @@ export class AddEmployeeComponent implements OnInit {
       tz: ['', Validators.required],
       birthDay: ['', Validators.required],
       startDate: ['', Validators.required],
-      Gender: ['male', Validators.required],
+      gender: ['male', Validators.required],
+      email:['',Validators.required],
       Roles: this.fb.array([])
     });
+  
+    // קריאה לפונקציה שמחזירה את רשימת סוגי התפקידים מהשרת ושמירה במשתנה rolesType
+    this.employeesService.getRolesType().subscribe(
+      (data: Role[]) => {
+        this.rolesType = data;
+      },
+      (error) => {
+        console.error('Failed to fetch roles types:', error);
+      }
+    );
+  
+    // הגדרת roles כמערך FormArray
+    this.roles = this.userForm.get('Roles') as FormArray;
   }
 
   addRole(): void {
     const roleGroup = this.fb.group({
-      roleName: ['', Validators.required],
-      isAdmin: [false, Validators.required],
-      startDate: ['', Validators.required]
+      roleTypeId: [-1, Validators.required],
+      startDate: ['', Validators.required],
+      menagment: [false] // ניהול ברירת מחדל - לא
     });
-    (this.userForm.get('Roles') as FormArray).push(roleGroup);
+    this.roles.push(roleGroup);
   }
 
   removeRole(index: number): void {
-    (this.userForm.get('Roles') as FormArray).removeAt(index);
+    this.roles.removeAt(index);
   }
 
   onSubmit(): void {
-    // Create an object in the format expected by the server
-    const workerData = {
-      firstName: this.userForm.value.firstName,
-      lastName: this.userForm.value.lastName,
-      tz: this.userForm.value.tz,
-      birthDay: this.userForm.value.birthDay,
-      startDate: this.userForm.value.startDate,
-      gender: this.userForm.value.Gender,
-      // email: this.userForm.value.email,
-      email:"ghjk@gmail.com" ,
-      roles: this.userForm.value.Roles,
-      isActive:true,
-      id:0
+    const formData = this.userForm.value;
+
+    const newEmployee: Employee = {
+      id: 0,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      tz: formData.tz,
+      birthDay: formData.birthDay,
+      startDate: formData.startDate,
+      gender: formData.gender,
+      isActive: true,
+      email: formData.email,
+      roles: formData.Roles
     };
-  
-    this.employeesService.addWorker(workerData)
-      .subscribe(
-        (response) => {
-          console.log('Worker added successfully:', response);
-        }
-        // ,
-        // (error) => {
-        //   console.error('Failed to add worker:', error);
-        // }
-      );
+
+    this.employeesService.addWorker(newEmployee).subscribe(
+      (response) => {
+        console.log('Worker added successfully:', response);
+      },
+      (error) => {
+        console.error('Failed to add worker:', error);
+      }
+    );
   }
-  
 }

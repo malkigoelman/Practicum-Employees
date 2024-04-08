@@ -18,7 +18,7 @@ export enum Gender{
     Male,Female
 }
 export class Role {
-    public  name: string;
+    public name: string;
     public isAdmin: boolean;
     public startDate:Date;
 }
