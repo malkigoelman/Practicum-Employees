@@ -3,12 +3,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-<button type="button" class="btn btn-outline-primary"(click)="exportXSLX()">להורדת פרטי העובדים</button>
-<div>
-  <input type="text" [(ngModel)]="searchText" placeholder="חיפוש..." (input)="onSearchInput()">
-  <button class="btn btn-outline-primary" (click)="searchAction()">
+<div class="mb-3">
+  <button type="button" class="btn btn-outline-primary "(click)="exportXSLX()">להורדת פרטי העובדים</button>
+  <input type="text" [(ngModel)]="searchText" class="btn " placeholder="לחץ כאן לחיפוש..." (input)="onSearchInput()">
+  <button class="btn btn-outline-primary"  (click)="searchAction()">
     {{ searchText ? 'ניקוי שדה החיפוש' : 'חפש' }}
   </button>
+  
 </div>
 <div class="container mt-25">
   <div class="row justify-content-center">

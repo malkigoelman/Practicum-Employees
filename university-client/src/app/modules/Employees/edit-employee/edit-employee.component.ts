@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { Employee } from '../models/employee.model';
 import { EmployeesService } from '../employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,6 +33,9 @@ export class EditEmployeeComponent implements OnInit {
       );
   }
 
+  get roles(): FormArray {
+    return this.employeeForm.get('Roles') as FormArray;
+  }
   createForm(): void {
     this.employeeForm = this.fb.group({
       firstName: [this.employee.firstName, Validators.required],
@@ -51,10 +54,12 @@ export class EditEmployeeComponent implements OnInit {
     });
   }
 
-  saveChanges(): void {
+  onSubmit(): void {
     const editedEmployee = this.employeeForm.value;
     console.log(editedEmployee);
-    
+    editedEmployee.firstName="nnnnn";
+    // editedEmployee.gender === 'Male' ? 0 : 1;
+    editedEmployee.gender =0;
     this.employeesService.editWorker(editedEmployee)
       .subscribe(
         (data) => {
@@ -68,7 +73,15 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   addRole(): void {
-    this.employee.roles.push({ name: '', isAdmin: false, startDate: null });
-    this.createForm();
+    this.roles.push(this.fb.group({
+      roleTypeId: ['', Validators.required],
+      startDate: ['', Validators.required],
+      management: [false]
+    }));
   }
+  
+  removeRole(index: number): void {
+    this.roles.removeAt(index);
+  }
+
 }

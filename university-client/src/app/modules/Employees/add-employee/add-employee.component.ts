@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { EmployeesService } from '../employee.service';
 import { Employee, Role } from '../models/employee.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-employee',
@@ -13,7 +14,7 @@ export class AddEmployeeComponent implements OnInit {
   rolesType: Role[] = []; // רשימת סוגי התפקידים שתוחזר מהשרת
   roles: FormArray; // מערך התפקידים בטופס
 
-  constructor(private employeesService: EmployeesService, private fb: FormBuilder) { }
+  constructor(private employeesService: EmployeesService, private fb: FormBuilder,private router:Router) { }
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -64,7 +65,7 @@ export class AddEmployeeComponent implements OnInit {
       tz: formData.tz,
       birthDay: formData.birthDay,
       startDate: formData.startDate,
-      gender: 0,
+      gender: formData.gender === 'Male' ? 0 : 1,
       isActive: true,
       email: formData.email,
       roles: formData.Roles
@@ -78,5 +79,6 @@ export class AddEmployeeComponent implements OnInit {
         console.error('Failed to add worker:', error);
       }
     );
+    this.router.navigate(['/employees']);
   }
 }

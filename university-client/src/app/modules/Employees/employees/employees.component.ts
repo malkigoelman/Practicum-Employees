@@ -64,13 +64,13 @@ export class EmployeesComponent implements OnInit {
     const id = worker.id;
     console.log(id);
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'אתה בטוח?',
+      text: "בפעולה זו הנך מוחק את העובד",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'כן!'
     }).then((result) => {
       if (result.isConfirmed) {
         // User confirmed deletion
@@ -79,7 +79,7 @@ export class EmployeesComponent implements OnInit {
             () => {
               this.workers = this.workers.filter(w => w !== worker); // מחיקת העובד מהרשימה
               console.log('Worker deleted successfully.');
-              Swal.fire('Deleted!', 'Your file has been deleted.', 'success'); // הצגת הודעת אישור
+              Swal.fire('נמחק!', 'עובד זה נמחק מרשימת העובדים.', 'success'); // הצגת הודעת אישור
             },
             (error) => {
               console.error('Error deleting worker:', error);
