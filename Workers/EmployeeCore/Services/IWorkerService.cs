@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Workers;
+using Workers.Core.Repositories;
 
 namespace Employee.Core.Services
 {
@@ -15,5 +16,6 @@ namespace Employee.Core.Services
         Task AddAsync(Worker worker);
         Task UpdateAsync(int id, Worker worker);
         Task DeleteAsync(int id);
+        Task UpdateStatusAsync(int id);
     }
 }

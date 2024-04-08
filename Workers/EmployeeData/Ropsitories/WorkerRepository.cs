@@ -29,6 +29,15 @@ namespace Employee.Data.Ropsitories
                 await _dataContext.SaveChangesAsync();
             }
         }
+        public async Task UpdateStatusAsync(int id)
+        {
+            var worker = await GetWorkerByIdAsync(id);
+            if (worker != null)
+            {
+                worker.IsActive = true;
+                await _dataContext.SaveChangesAsync();
+            }
+        }
         public async Task<IEnumerable<Worker>> GetAllAsync()
         {
             return await _dataContext.Workers.Where(w => w.IsActive).ToListAsync();
@@ -46,6 +55,7 @@ namespace Employee.Data.Ropsitories
             Worker existingWorker =await GetWorkerByIdAsync(id);
             if (existingWorker != null)
             {
+                //existingWorker.About = worker.About;
                 existingWorker.FirstName = worker.FirstName;
                 existingWorker.LastName = worker.LastName;
                 existingWorker.Email = worker.Email;
@@ -54,6 +64,7 @@ namespace Employee.Data.Ropsitories
                 existingWorker.BirthDay = worker.BirthDay;
                 existingWorker.Gender = worker.Gender;
                 existingWorker.Roles = worker.Roles;
+                existingWorker.IsActive = worker.IsActive;
                 _dataContext.SaveChanges();
             }
         }

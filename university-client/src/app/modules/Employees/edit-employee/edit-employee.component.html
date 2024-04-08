@@ -1,11 +1,9 @@
-<div>
   <h2>Edit Employee</h2>
-  <form (ngSubmit)="saveChanges()">
-    <div *ngIf="employee">
-      <div class="form-group">
-        <label for="firstName"><i class="fas fa-user"></i> First Name:</label>
-        <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName" required>
-      </div>
+  <div *ngIf="employee">
+    <div class="form-group">
+      <label for="firstName"><i class="fas fa-user"></i> First Name:</label>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName" required>
+    </div>
     <div class="form-group">
       <label for="lastName"><i class="fas fa-user"></i> Last Name:</label>
       <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName" required>
@@ -16,53 +14,71 @@
     </div>
     <div class="form-group">
       <label for="Gender"><i class="fas fa-venus-mars"></i> Gender:</label>
-      <select class="form-control" id="Gender" [(ngModel)]="employee.gender" name="Gender" required>
+      <select class="form-control" id="Gender" [(ngModel)]="employee.gender" name="gender" required>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
     </div>
     <div class="form-group">
       <label for="email"><i class="fas fa-id-card"></i> email:</label>
-      <input type="text" class="form-control" id="email" [(ngModel)]="employee.email" name="email" required>
+      <input type="email" class="form-control" id="email" [(ngModel)]="employee.email" name="email" required>
     </div>
     <div class="form-group">
       <label for="startDate"><i class="fas fa-id-card"></i> Start Date:</label>
       <input type="date" class="form-control" id="startDate" [(ngModel)]="employee.startDate" name="startDate" required>
     </div>
     <div class="form-group">
-      <label for="birthDay"><i class="fas fa-id-card"></i> birthDay:</label>
+      <label for="birthDay"><i class="fas fa-id-card"></i> Birth Day:</label>
       <input type="date" class="form-control" id="birthDay" [(ngModel)]="employee.birthDay" name="birthDay" required>
     </div>
     <div class="form-group">
-      <label for="active"><i class="fas fa-check-circle"></i> active:</label>
+      <label for="active"><i class="fas fa-check-circle"></i> Active:</label>
       <input type="checkbox" class="form-control" id="active" [(ngModel)]="employee.isActive" name="active">
     </div>
+    <div class="col-md-6">
+      <label for="inputCity" class="form-label">City</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="col-md-4">
+      <label for="inputState" class="form-label">State</label>
+      <select id="inputState" class="form-select">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="inputZip" class="form-label">Zip</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Check me out
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+  
     <div *ngFor="let role of employee.roles; let i = index">
       <div class="form-group">
         <label for="roleName">Role Name:</label>
         <input type="text" class="form-control" id="roleName{{i}}" [(ngModel)]="role.name" name="roleName{{i}}" required>
       </div>
       <div class="form-group">
-        <label for="isAdmin">האם מנהל:</label><br>
+        <label for="isAdmin">Is Admin:</label><br>
         <input type="radio" id="isAdminYes{{i}}" name="isAdmin{{i}}" [(ngModel)]="role.isAdmin" [value]="true">
-        <label for="isAdminYes{{i}}">כן</label><br>
+        <label for="isAdminYes{{i}}">Yes</label><br>
         <input type="radio" id="isAdminNo{{i}}" name="isAdmin{{i}}" [(ngModel)]="role.isAdmin" [value]="false">
-        <label for="isAdminNo{{i}}">לא</label><br>
+        <label for="isAdminNo{{i}}">No</label><br>
       </div>
-      
-      <!-- <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [(ngModel)]="role.isAdmin" checked>
-        <label class="form-check-label" for="flexSwitchCheckChecked">האם מנהלי: </label>
-      </div> -->
-      
       <div class="form-group">
-        <label for="startDate"><i class="fas fa-id-card"></i> Start Date:</label>
-        <input type="date" class="form-control" id="startDate" [(ngModel)]="role.startDate" name="startDate" required>
+        <label for="roleStartDate">Role Start Date:</label>
+        <input type="date" class="form-control" id="roleStartDate{{i}}" [(ngModel)]="role.startDate" name="roleStartDate{{i}}" required>
       </div>
     </div>
     <button type="button" class="btn btn-primary" (click)="addRole()">Add Role</button>
-    <button type="submit" class="btn btn-primary">Save Changes</button>
-  </div>
-
-  </form>
+    <button type="button" class="btn btn-primary" (click)="saveChanges()">Save Changes</button>
 </div>

@@ -41,5 +41,9 @@ namespace Workers.Service
         {
             await _workerRepository.DeleteAsync(id);
         }
+        public async Task UpdateStatusAsync(int id)
+        {
+            await _workerRepository.UpdateStatusAsync(id);
+        }
     }
 }

@@ -20,22 +20,8 @@ export class AppComponent {
     this.isHovering = false;
   }
   
-  searchText: string = '';
-  searchResults: Employee[] = [];
-
+  
   constructor(private employeesService: EmployeesService) {}
 
-  searchEmployees(): void {
-    if (this.searchText.trim() !== '') {
-      this.employeesService.searchEmployees(this.searchText)
-        // .subscribe(
-        //   (results) => {
-        //     this.searchResults = results;
-        //   },
-        //   (error) => {
-        //     console.error('Error searching employees:', error);
-        //   }
-        // );
-    }
-  }
+
 }

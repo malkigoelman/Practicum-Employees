@@ -64,7 +64,7 @@ export class AddEmployeeComponent implements OnInit {
       tz: formData.tz,
       birthDay: formData.birthDay,
       startDate: formData.startDate,
-      gender: formData.gender,
+      gender: 0,
       isActive: true,
       email: formData.email,
       roles: formData.Roles

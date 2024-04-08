@@ -29,6 +29,9 @@ export class EmployeesService {
   deleteWorker(id: number): Observable<void> {
     return this._http.delete<void>(`${this._baseUrl}/${id}`);
   }
+  updateStatus(id: number): Observable<void> {
+    return this._http.delete<void>(`${this._baseUrl}/${id}/update`);
+  }
   editWorker(employee: Employee): Observable<Employee> {
     const url = `${this._baseUrl}/${employee.id}`;
     console.log(employee);
@@ -47,7 +50,8 @@ export class EmployeesService {
     return this._http.get<Role[]>('https://localhost:7027/api/Role/GetRoleNames');
   }
   searchEmployees(s:string){
-
+    const url=`${this._baseUrl}/search/${s}`;
+    return this._http.get<Employee[]>(url);
   }
 
 }

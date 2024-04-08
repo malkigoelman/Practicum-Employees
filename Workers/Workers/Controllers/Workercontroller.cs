@@ -77,8 +77,19 @@ namespace Workers.Controllers
             await _workerRepository.DeleteAsync(id);
             return Ok();
         }
+        [HttpDelete("{id}/update")]
+        public async Task<IActionResult> UpdateStatusAsync(int id)
+        {
+            var worker = await _workerRepository.GetWorkerByIdAsync(id);
+            if (worker == null)
+            {
+                return NotFound();
+            }
+            await _workerRepository.UpdateStatusAsync(id);
+            return Ok();
+        }
 
-        [HttpGet("search")]
+        [HttpGet("search/{searchString}")]
         public async Task<IActionResult> Search(string searchString)
         {
             var workers = await _workerRepository.SearchAsync(searchString);

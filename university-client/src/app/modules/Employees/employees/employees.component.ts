@@ -20,9 +20,46 @@ export class EmployeesComponent implements OnInit {
   constructor(private employeesService: EmployeesService, private router: Router) { }
   @ViewChild('table') table: ElementRef;
   ngOnInit(): void {
-    this.getWorkers();
+    this.searchEmployees();
   }
- 
+  searchText: string = '';
+  searchResults: Employee[] = [];
+  onSearchInput(): void {
+    if (this.searchText.trim() !== '') {
+      this.searchEmployees();
+    }
+  }
+  
+  searchAction(): void {
+    if (this.searchText.trim() === '') {
+      this.searchEmployees();
+    } else {
+      this.searchClean();
+    }
+  }
+  
+  searchClean(): void {
+    this.searchText = ''; // השמה של ערך ריק לשדה החיפוש
+    this.searchEmployees(); // קריאה מחדש לפונקצית החיפוש כדי לרענן את רשימת העובדים
+  }
+  
+  searchEmployees(): void {
+    if (this.searchText.trim() === '') {
+      this.getWorkers(); // אם החיפוש ריק, נביא את כל העובדים
+    } else {
+      // אם החיפוש אינו ריק, נבצע את פעולת החיפוש ונציג את התוצאות
+      this.employeesService.searchEmployees(this.searchText)
+        .subscribe(
+          (results) => {
+            this.workers = results;
+          },
+          (error) => {
+            console.error('Error searching employees:', error);
+          }
+        );
+    }
+  }
+  
   removeWorker(worker: Employee): void {
     const id = worker.id;
     console.log(id);
@@ -53,7 +90,7 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  
+
   getWorkers(): void {
     this.employeesService.getWorkers()
       .subscribe(
@@ -81,7 +118,7 @@ export class EmployeesComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, name);
   }
-  sendEmailToEmployee(employee:Employee): void {
+  sendEmailToEmployee(employee: Employee): void {
     const subject = encodeURIComponent('רשימת התפקידים שלך');
     let body = 'רשימת התפקידים שלך:\n\n';
     // employee.roles.forEach((role, index) => {
@@ -90,7 +127,7 @@ export class EmployeesComponent implements OnInit {
     const mailtoLink = `mailto:${employee.email}?subject=${subject}&body=${encodeURIComponent(body)}`;
     window.open(mailtoLink, '_blank');
   }
-   
+
 
   sheetToArrayBuffer(workbook: XLSX.WorkBook): ArrayBuffer {
     const wbout: ArrayBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });

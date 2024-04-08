@@ -1,31 +1,34 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"> -->
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h2 style="font-family: 'Arial', sans-serif;">רשימת העובדים</h2>
-      <table class="table table-striped" style="font-family: 'Arial', sans-serif;">
+<div class="container mt-25">
+  <div class="row justify-content-center">
+    <div class="col-md-25">
+      <div class="card">
+        <div class="card-body">
+      <h2 class="card-title text-center turquoise">רשימת העובדים</h2>
+      <table class="table" style="font-family: 'Arial', sans-serif;">
         <thead>
           <tr>
+            <th scope="col">#</th>
             <th scope="col"><i class="fas fa-user"></i> שם פרטי</th>
             <th scope="col"><i class="fas fa-user"></i> שם משפחה</th>
             <th scope="col"><i class="fas fa-id-card"></i> תעודת זהות</th>
             <th scope="col"><i class="fas fa-save"></i> תאריך תחילת העבודה </th>
             <th scope="col"><i class="fas "></i>סטטוס</th>
-            <th scope="col"><i class="fas fa-cogs"></i> פעולות</th>
+            <th scope="col"><i class="fas fa-cogs"></i> שינוי סטטוס</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let worker of employees">
+        <tbody class="table-group-divider">
+          <tr *ngFor="let worker of employees; let i = index">
+            <td>{{ i + 1 }}</td>
             <td>{{worker.firstName}}</td>
             <td>{{worker.lastName}}</td>
             <td>{{worker.tz}}</td>
             <td>{{worker.startDate}}</td>
             <td>{{worker.isActive}}</td>
+            <td><button class="btn btn-outline-primary" (click)="changeStatus(worker)">שנה סטטוס</button></td>
           </tr>
         </tbody>
       </table>
