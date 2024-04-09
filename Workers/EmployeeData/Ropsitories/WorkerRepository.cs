@@ -84,7 +84,12 @@ namespace Employee.Data.Ropsitories
                     w.FirstName.Contains(searchString) ||
                     w.LastName.Contains(searchString) ||
                     w.Email.Contains(searchString) ||
-                    w.Tz.Contains(searchString))
+                    w.Tz.Contains(searchString)
+                    //||
+                    //w.BirthDay.CompareTo(searchString) > 0||
+                    //w.StartDate.CompareTo(searchString)>0||
+                    //w.Gender.Equals(searchString)
+                    ).Where(w=>w.IsActive)
                 .ToListAsync();
         }
 

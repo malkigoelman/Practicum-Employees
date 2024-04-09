@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'; 
 import { Employee } from '../models/employee.model';
 import { EmployeesService } from '../employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -52,13 +52,14 @@ export class EditEmployeeComponent implements OnInit {
         startDate: [role.startDate]
       })))
     });
+    console.log(this.employeeForm.value);
   }
 
   onSubmit(): void {
     const editedEmployee = this.employeeForm.value;
     console.log(editedEmployee);
-    editedEmployee.firstName="nnnnn";
-    // editedEmployee.gender === 'Male' ? 0 : 1;
+    // editedEmployee.firstName="nnnnn";
+    editedEmployee.gender === 'Male' ? 0 : 1;
     editedEmployee.gender =0;
     this.employeesService.editWorker(editedEmployee)
       .subscribe(
