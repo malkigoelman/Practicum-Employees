@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeesService } from '../employee.service';
 import Swal from 'sweetalert2';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-all-employee',
   templateUrl: './all-employee.component.html',

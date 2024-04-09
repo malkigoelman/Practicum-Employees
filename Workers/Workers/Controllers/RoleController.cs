@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Employee.Api.Models;
 using Employee.Core.Models;
 using Employee.Core.Services;
-using Employee.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +15,22 @@ namespace Employee.Api.Controllers
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _roleService;
-        
-        public RoleController(IRoleService roleService) => _roleService = roleService;
-        
+        private readonly IMapper _mapper;
+
+        public RoleController(IRoleService roleService, IMapper mapper)
+        {
+            _roleService = roleService;
+            _mapper = mapper;
+        }
+
         [HttpGet]
-        public async Task<IEnumerable<Role>> Get()=> await _roleService.GetAsync();
+        public async Task<IEnumerable<Role>> Get() => await _roleService.GetAsync();
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Role>> Get(int id)
         {
             var role = await _roleService.GetAsync();
-            var foundRole = role.FirstOrDefault(r => r.EmployeeId == id);
+            var foundRole = role.FirstOrDefault(r => r.RoleId == id);
             if (foundRole == null)
             {
                 return NotFound();
@@ -37,10 +42,11 @@ namespace Employee.Api.Controllers
         public async Task<IEnumerable<RoleName>> GetRoleNames() => await _roleService.GetRoleNamesAsync();
 
         [HttpPost("AddRole")]
-        public async Task<IActionResult> AddRole([FromBody] Role role)
+        public async Task<IActionResult> AddRole([FromBody] RolePostModel ro)
         {
+            var role = _mapper.Map<Role>(ro);
             await _roleService.AddAsync(role);
-            return CreatedAtAction(nameof(Get), new { id = role.EmployeeId }, role);
+            return Ok();
         }
 
         [HttpPost("AddRoleName")]
@@ -51,9 +57,10 @@ namespace Employee.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Role role)
+        public async Task<IActionResult> Put(int id, [FromBody] RolePostModel rol)
         {
-            if (id != role.EmployeeId)
+            var role = _mapper.Map<Role>(rol);
+            if (id != role.RoleId)
             {
                 return BadRequest();
             }
@@ -65,7 +72,7 @@ namespace Employee.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var existingRole = await _roleService.GetAsync();
-            var foundRole = existingRole.FirstOrDefault(r => r.EmployeeId == id);
+            var foundRole = existingRole.FirstOrDefault(r => r.RoleId == id);
             if (foundRole == null)
             {
                 return NotFound();

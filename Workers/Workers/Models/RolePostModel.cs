@@ -1,4 +1,5 @@
-﻿using System;
+﻿// RolePostModel.cs
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Employee.Api.Models

@@ -12,7 +12,7 @@ namespace Workers.Service
 
         public WorkerService(IWorkerRepository workerRepository) => _workerRepository = workerRepository;
 
-        public async Task<IEnumerable<Worker>> GetAllAsync() { return await _workerRepository.GetAllAsync(); }
+        public async Task<IEnumerable<Worker>> GetAllAsync()=> await _workerRepository.GetAllAsync();
 
         public async Task<IEnumerable<Worker>> GetAllEmployeesAsync() => await _workerRepository.GetAllEmployeesAsync();
 

@@ -59,7 +59,8 @@ namespace Workers.Controllers
         public async Task<IActionResult> Post([FromBody] EmployeePostModel employee)
         {
             var emp = _mapper.Map<Worker>(employee);
-            emp.Roles = employee.Roles.Select(role => _mapper.Map<Role>(role)).ToList();
+            emp.Roles = _mapper.Map<List<Role>>(emp.Roles).ToList();
+            //emp.Roles = employee.Roles.Select(role => _mapper.Map<Role>(role)).ToList();
             await _workerService.AddAsync(emp);
             return Ok();
         }

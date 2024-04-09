@@ -4,6 +4,7 @@ import { EmployeesService } from '../employee.service';
 import { Employee, Role, Gender } from '../models/employee.model';
 import { Router } from '@angular/router';
 import { RoleService } from '../role.service';
+import { EmployeesComponent } from '../employees/employees.component';
 
 @Component({
   selector: 'app-add-employee',
@@ -15,8 +16,8 @@ export class AddEmployeeComponent implements OnInit {
   rolesType: Role[] = [];
   roles: FormArray;
 
-  constructor(private employeesService: EmployeesService,private fb: FormBuilder,private router: Router,private roleService: RoleService) { }
-
+  constructor(private employeesService: EmployeesService,private fb: FormBuilder,private router: Router,private roleService: RoleService){ }
+  
   ngOnInit(): void {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],

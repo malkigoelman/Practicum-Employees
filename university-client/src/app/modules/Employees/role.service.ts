@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Role } from './models/employee.model';
 
 @Injectable({
@@ -19,12 +19,19 @@ export class RoleService {
     return this._http.get<Role[]>('https://localhost:7027/api/Role/GetRoleNames');
   }
 
-  // שמירת תפקיד בשרת
   saveRole(role: Role): Observable<any> {
     const dd2 = new Date(role.startDate);
-    role.startDate=dd2
-    role.name=1;
-    role.isAdmin=true;
-    return this._http.post(`${this.baseUrl}/api/Role/AddRole`, role);
+    role.startDate = dd2;
+    return this.getRolesType().pipe(
+      map((roles: Role[]) => {
+        const index = roles.findIndex(type => type.name === role.name);
+        if (index !== -1) {
+          role.name = index; // הגדרת name לאינדקס שנמצא
+        } else {
+          console.error('Role not found in rolesType array');
+        }
+        return this._http.post(`${this.baseUrl}/api/Role/AddRole`, role);
+      })
+    );
   }
 }

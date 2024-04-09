@@ -7,6 +7,7 @@ using Employee.Service;
 using System.Text.Json.Serialization;
 using Workers.Core.Repositories;
 using Workers.Service;
+using Employee.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -9,27 +9,27 @@ namespace Employee.Api.Models
     public class EmployeePostModel
     {
 
-       // [Required(ErrorMessage = "First name is required")]
+        [Required(ErrorMessage = "First name is required")]
         public string FirstName { get; set; }
 
-        //[Required(ErrorMessage = "Last name is required")]
+        [Required(ErrorMessage = "Last name is required")]
         public string LastName { get; set; }
 
-        //[Required(ErrorMessage = "Tz is required")]
-        //[StringLength(9, MinimumLength = 9, ErrorMessage = "Tz must be 9 characters long")]
+        [Required(ErrorMessage = "Tz is required")]
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "Tz must be 9 characters long")]
         public string Tz { get; set; }
 
         public bool IsActive { get; set; }
 
-        //[Required(ErrorMessage = "Start date is required")]
-        //[DataType(DataType.Date)]
+        [Required(ErrorMessage = "Start date is required")]
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
-        //[Required(ErrorMessage = "Birth day is required")]
-        //[DataType(DataType.Date)]
+        [Required(ErrorMessage = "Birth day is required")]
+        [DataType(DataType.Date)]
         public DateTime BirthDay { get; set; }
 
-        //[Required(ErrorMessage = "Gender is required")]
+        [Required(ErrorMessage = "Gender is required")]
         public Gender Gender { get; set; }
 
         //[Required(ErrorMessage = "Email is required")]
@@ -38,7 +38,7 @@ namespace Employee.Api.Models
 
 
         //[Required(ErrorMessage = "At least one role is required")]
-        public List<Role> Roles { get; set; }
+        public List<RolePostModel> Roles { get; set; }
 
         public static ValidationResult IsStartDateAfterBirthDay(DateTime startDate, ValidationContext context)
         {

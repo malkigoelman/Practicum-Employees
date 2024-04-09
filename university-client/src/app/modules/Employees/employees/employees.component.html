@@ -17,6 +17,9 @@
       <div class="card">
         <div class="card-body">
           <h2 class="card-title text-center turquoise">רשימת העובדים</h2>
+          <button class="btn btn-primary mt-2" (click)="addWorker()">
+            <i class="fas fa-plus"></i> הוספת עובד
+          </button>
           <table #table class="table" style="font-family:'Arial', sans-serif;">
             <thead>
               <tr>
@@ -34,7 +37,7 @@
                 <td>{{ worker.firstName }}</td>
                 <td>{{ worker.lastName }}</td>
                 <td>{{ worker.tz }}</td>
-                <td>{{ worker.startDate }}</td>
+                <td>{{ worker.startDate | date:"dd/MM/yyyy" }}</td>
                 <td>
                   <button class="btn btn-outline-primary" (click)="editWorker(worker)">
                     <i class="fas fa-edit"></i>
@@ -50,9 +53,7 @@
               
             </tbody>
           </table>
-          <button class="btn btn-primary mt-2" (click)="addWorker()">
-            <i class="fas fa-plus"></i>
-          </button>
+        
         </div>
       </div>
     </div>
