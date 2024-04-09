@@ -10,15 +10,14 @@ namespace Employee.Data.Ropsitories
     public class WorkerRepository : IWorkerRepository
     {
         private readonly DataContext _dataContext;
-        public WorkerRepository(DataContext dataContext)
-        {
-            _dataContext = dataContext;
-        }
+        public WorkerRepository(DataContext dataContext) => _dataContext = dataContext;
+       
         public async Task AddAsync(Worker worker)
         {
             _dataContext.Workers.Add(worker);
             await _dataContext.SaveChangesAsync();
         }
+       
         public async Task DeleteAsync(int id)
         {
             
@@ -29,6 +28,7 @@ namespace Employee.Data.Ropsitories
                 await _dataContext.SaveChangesAsync();
             }
         }
+        
         public async Task UpdateStatusAsync(int id)
         {
             var worker = await GetWorkerByIdAsync(id);
@@ -38,24 +38,21 @@ namespace Employee.Data.Ropsitories
                 await _dataContext.SaveChangesAsync();
             }
         }
-        public async Task<IEnumerable<Worker>> GetAllAsync()
-        {
-            return await _dataContext.Workers.Where(w => w.IsActive).ToListAsync();
-        }
+
+        public async Task<IEnumerable<Worker>> GetAllAsync() { return await _dataContext.Workers.Where(w => w.IsActive).ToListAsync(); }
+        
         public async Task<IEnumerable<Worker>> GetAllEmployeesAsync()
         {
             return await _dataContext.Workers.ToListAsync();
         }
-        public async Task<Worker> GetWorkerByIdAsync(int id)
-        {
-            return await _dataContext.Workers.FirstOrDefaultAsync(w => w.Id == id);
-        }
+        
+        public async Task<Worker> GetWorkerByIdAsync(int id)=> await _dataContext.Workers.FirstOrDefaultAsync(w => w.Id == id);
+        
         public async Task<Worker> UpdateAsync(int id, Worker worker)
         {
             Worker existingWorker =await GetWorkerByIdAsync(id);
             if (existingWorker != null)
             {
-                //existingWorker.About = worker.About;
                 existingWorker.FirstName = worker.FirstName;
                 existingWorker.LastName = worker.LastName;
                 existingWorker.Email = worker.Email;
@@ -69,6 +66,7 @@ namespace Employee.Data.Ropsitories
             }
             return existingWorker;
         }
+        
         public async Task<IEnumerable<Role>> GetWorkerRolesAsync(int id)
         {
             var worker = await GetWorkerByIdAsync(id);
@@ -78,6 +76,7 @@ namespace Employee.Data.Ropsitories
             }
             return null;
         }
+        
         public async Task<IEnumerable<Worker>> SearchAsync(string searchString)
         {
             return await _dataContext.Workers

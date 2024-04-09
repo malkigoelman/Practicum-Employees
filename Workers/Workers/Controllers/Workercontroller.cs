@@ -49,6 +49,12 @@ namespace Workers.Controllers
             return Ok(worker);
         }
 
+        [HttpGet("search/{searchString}")]
+        public async Task<IActionResult> Search(string searchString)
+        {
+            var workers = await _workerService.SearchAsync(searchString);
+            return Ok(workers);
+        }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] EmployeePostModel employee)
         {
@@ -57,6 +63,7 @@ namespace Workers.Controllers
             await _workerService.AddAsync(emp);
             return Ok();
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] EmployeePostModel employee)
@@ -67,13 +74,13 @@ namespace Workers.Controllers
             return Ok(empDto);
         }
 
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _workerService.DeleteAsync(id);
             return Ok();
         }
+
         [HttpDelete("{id}/update")]
         public async Task<IActionResult> UpdateStatusAsync(int id)
         {
@@ -86,11 +93,5 @@ namespace Workers.Controllers
             return Ok();
         }
 
-        [HttpGet("search/{searchString}")]
-        public async Task<IActionResult> Search(string searchString)
-        {
-            var workers = await _workerService.SearchAsync(searchString);
-            return Ok(workers);
-        }
     }
 }

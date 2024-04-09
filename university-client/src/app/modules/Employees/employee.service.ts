@@ -46,9 +46,7 @@ export class EmployeesService {
     const url = `${this._baseUrl}/${id}`;
     return this._http.get<Employee>(url);
   }
-  getRolesType(): Observable<Role[]> {
-    return this._http.get<Role[]>('https://localhost:7027/api/Role/GetRoleNames');
-  }
+
   searchEmployees(s:string){
     const url=`${this._baseUrl}/search/${s}`;
     return this._http.get<Employee[]>(url);

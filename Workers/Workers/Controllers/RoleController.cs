@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Employee.Core.Models;
 using Employee.Core.Services;
+using Employee.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,11 @@ namespace Employee.Api.Controllers
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _roleService;
-
-        public RoleController(IRoleService roleService)
-        {
-            _roleService = roleService;
-        }
-
+        
+        public RoleController(IRoleService roleService) => _roleService = roleService;
+        
         [HttpGet]
-        public async Task<IEnumerable<Role>> Get()
-        {
-            return await _roleService.GetAsync();
-        }
+        public async Task<IEnumerable<Role>> Get()=> await _roleService.GetAsync();
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Role>> Get(int id)
@@ -38,6 +33,9 @@ namespace Employee.Api.Controllers
             return foundRole;
         }
 
+        [HttpGet("GetRoleNames")]
+        public async Task<IEnumerable<RoleName>> GetRoleNames() => await _roleService.GetRoleNamesAsync();
+
         [HttpPost("AddRole")]
         public async Task<IActionResult> AddRole([FromBody] Role role)
         {
@@ -50,12 +48,6 @@ namespace Employee.Api.Controllers
         {
             await _roleService.AddAsync(name);
             return CreatedAtAction(nameof(GetRoleNames), new { id = name.Id }, name);
-        }
-
-        [HttpGet("GetRoleNames")]
-        public async Task<IEnumerable<RoleName>> GetRoleNames()
-        {
-            return await _roleService.GetRoleNamesAsync();
         }
 
         [HttpPut("{id}")]

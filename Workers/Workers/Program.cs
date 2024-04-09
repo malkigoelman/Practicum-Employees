@@ -14,10 +14,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
         builder => builder
-            .WithOrigins("http://localhost:4200") // מקורות מורשים
-            .AllowAnyMethod() // אפשר כל מתודה (GET, POST, PUT, DELETE וכו')
-            .AllowAnyHeader() // אפשר כל כותרת
-            .AllowCredentials()); // אפשר קובצי Cookie מהמקור
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyMethod() 
+            .AllowAnyHeader() 
+            .AllowCredentials());
 });
 
 
@@ -30,19 +30,16 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add DbContext and repositories
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 builder.Services.AddScoped<IWorkerService, WorkerService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
-// Add AutoMapper
 builder.Services.AddAutoMapper(typeof(ApiMappingProfile), typeof(MappingProfile));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

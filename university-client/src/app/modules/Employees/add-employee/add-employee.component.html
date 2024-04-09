@@ -6,54 +6,53 @@
                     <div class="card-body">
                         <h5 class="card-title text-center turquoise">Add Employee</h5>
                         <div class="form-group mb-3">
-                            <label for="firstName"><i class="fas fa-user"></i> שם פרטי:</label>
+                            <label for="firstName"><i class="fas fa-user"></i> First Name:</label>
                             <input class="form-control" type="text" id="firstName" formControlName="firstName" />
-                            <div *ngIf="userForm.get('firstName')?.touched && userForm.get('firstName')?.errors">
-                                <div class="alert alert-danger">This field is required</div>
-                            </div>
+                            <div *ngIf="userForm.get('firstName').invalid && userForm.get('firstName').touched" class="alert alert-danger">First Name is required</div>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="lastName"><i class="fas fa-user"></i> משפחה:</label>
+                            <label for="lastName"><i class="fas fa-user"></i> Last Name:</label>
                             <input class="form-control" type="text" id="lastName" formControlName="lastName" />
-                            <div *ngIf="userForm.get('lastName')?.touched && userForm.get('lastName')?.errors">
-                                <div class="alert alert-danger">This field is required</div>
-                            </div>
+                            <div *ngIf="userForm.get('lastName').invalid && userForm.get('lastName').touched" class="alert alert-danger">Last Name is required</div>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="tz"><i class="fas fa-user"></i>תעודת זהות:</label>
+                          <div class="form-group mb-3">
+                            <label for="tz"><i class="fas fa-user"></i>Id:</label>
                             <input class="form-control" type="text" id="tz" formControlName="tz" />
-                            <div *ngIf="userForm.get('tz')?.touched && userForm.get('tz')?.errors">
-                                <div class="alert alert-danger">This field is required</div>
-                            </div>
                         </div>
+                        <div *ngIf="userForm.get('tz').errors && (userForm.get('tz').touched || userForm.get('tz').dirty)" class="alert alert-danger">
+                            <div *ngIf="userForm.get('tz').hasError('required')">ID is required</div>
+                            <div *ngIf="userForm.get('tz').hasError('minlength') || userForm.get('tz').hasError('maxlength')">ID must be 9 digits</div>
+                          </div>
                         <div class="form-group mb-3">
-                            <label for="startDate"><i class="fas fa-user"></i> תאריך תחילת העבודה</label>
+                            <label for="startDate"><i class="fas fa-user"></i> Start Date:</label>
                             <input class="form-control" type="date" id="startDate" formControlName="startDate" />
-                            <div *ngIf="userForm.get('startDate')?.touched && userForm.get('startDate')?.errors">
-                                <div class="alert alert-danger">This field is required</div>
-                            </div>
+                            <div *ngIf="userForm.get('startDate').invalid && userForm.get('startDate').touched" class="alert alert-danger">Start Date is required</div>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="birthDay"><i class="fas fa-user"></i>תאריך לידה:</label>
+                            <label for="birthDay"><i class="fas fa-user"></i> Date of Birth:</label>
                             <input class="form-control" type="date" id="birthDay" formControlName="birthDay" />
-                            <div *ngIf="userForm.get('birthDay')?.touched && userForm.get('birthDay')?.errors">
-                                <div class="alert alert-danger">This field is required</div>
-                            </div>
+                            <div *ngIf="userForm.get('birthDay').invalid && userForm.get('birthDay').touched" class="alert alert-danger">Date of Birth is required</div>
                         </div>
+                        <div *ngIf="userForm.hasError('invalidDates')" class="alert alert-danger">
+                            Date of Birth must be before Start Date
+                          </div>
                         <div class="form-group mb-3">
-                            <label for="gender"><i class="fas fa-venus-mars"></i> מגדר:</label>
+                            <label for="gender"><i class="fas fa-venus-mars"></i> Gender:</label>
                             <select class="form-control" id="gender" formControlName="gender" required>
-                                <option value="male">זכר</option>
-                                <option value="female">נקבה</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
+                            <div *ngIf="userForm.get('gender').invalid && userForm.get('gender').touched" class="alert alert-danger">Gender is required</div>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="email"><i class="fas fa-user"></i>email :</label>
+                            <label for="email"><i class="fas fa-user"></i> Email:</label>
                             <input class="form-control" type="email" id="email" formControlName="email" />
-                            <div *ngIf="userForm.get('email')?.touched && userForm.get('email')?.errors">
-                                <div class="alert alert-danger">This field is required</div>
-                            </div>
+                            <div *ngIf="userForm.get('email').invalid && userForm.get('email').touched" class="alert alert-danger">Email is required</div>
                         </div>
+                        <div *ngIf="userForm.get('email').invalid && (userForm.get('email').touched || userForm.get('email').dirty)" class="alert alert-danger">
+                            <div *ngIf="userForm.get('email').hasError('required')">Email is required</div>
+                            <div *ngIf="userForm.get('email').hasError('email')">Invalid email address</div>
+                          </div>
                         <!-- roles -->
                         <div formArrayName="Roles">
                             <div *ngFor="let role of roles.controls; let i = index" [formGroupName]="i" class="form-group">
@@ -64,20 +63,18 @@
 
                                 <label for="startDate">Start Date:</label>
                                 <input type="date" formControlName="startDate" id="startDate" class="form-control">
+                                <div *ngIf="roles.controls[i].get('startDate').invalid && roles.controls[i].get('startDate').touched" class="alert alert-danger">Start Date is required</div>
 
                                 <label>
-                                    <input type="checkbox" formControlName="management"> Management
+                                    <input type="checkbox" formControlName="isAdmin"> Management
                                 </label>
 
                                 <button type="button" class="btn btn-danger" (click)="removeRole(i)">Remove Role</button>
                             </div>
                         </div>
 
-                        <!-- <button type="button" (click)="addRole()">Add Role</button> -->
-
-
-                        <button type="button" class="btn btn-primary" (click)="addRole()">הוסף תפקיד</button>
-                        <button type="submit" class="btn btn-primary" onclick="window.location.reload();">שמור</button>
+                        <button type="button" class="btn btn-primary" (click)="addRole()">Add Role</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </div>

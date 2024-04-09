@@ -1,5 +1,5 @@
-export class Role {
-    roleName: string;
-    management: boolean;
-    startDate: Date;
-}
+// export class Role {
+//     roleName: string;
+//     management: boolean;
+//     startDate: Date;
+// }
